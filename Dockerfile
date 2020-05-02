@@ -28,9 +28,9 @@ RUN python -m pip install -U https://github.com/OpenModelica/OMPython/archive/ma
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add User
-RUN useradd -m -s /bin/bash smartslab
-RUN chown -R smartslab:smartslab /home/smartslab
+RUN useradd -m -s /bin/bash manuelnvro
+RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
-USER smartslab
-ENV USER smartslab
-WORKDIR /home/smartslab
+USER manuelnvro
+ENV USER manuelnvro
+WORKDIR /home/manuelnvro
