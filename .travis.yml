@@ -10,6 +10,5 @@ before_install:
 before_script:  
   - docker run -ti -v $(pwd):/DockerTraining manuelnvro/dockertraining:1.0 bash 
   
-
 script:
   - docker run -i -t -v $(pwd):/OpenIPSL smartslab/openipsl sh -c "python /OpenIPSL/CI/syntaxCheck.py"
