@@ -19,12 +19,12 @@ import git
 
 #By default, the code runs in manuelnvro OM 16. To change the computer change the following folders.
 #OpenIPSL Location
-OpenIPSL = "/home/manuelnvro/dev/Gitted/DockerTraining/OpenIPSL-master/"
+OpenIPSL = "/DockerTraining/OpenIPSL-master/"
 #GitHub Location
 GitHubOpenIPSL = "https://github.com/marcelofcastro/OpenIPSL.git"
-OpenIPSLPackage = "/home/manuelnvro/dev/Gitted/DockerTraining/OpenIPSL-master/OpenIPSL/package.mo"
+OpenIPSLPackage = "/DockerTraining/OpenIPSL-master/OpenIPSL/package.mo"
 #Working Directory
-WorkingDir = "/home/manuelnvro/dev/Gitted/DockerTraining/CI/WorkingDir/"
+WorkingDir = "/DockerTraining/CI/WorkingDir/"
 
 
 # In[7]:
