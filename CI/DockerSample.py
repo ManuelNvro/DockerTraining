@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[5]:
 
 
 from OMPython import OMCSessionZMQ
@@ -14,27 +14,27 @@ import shutil
 import git
 
 
-# In[2]:
+# In[11]:
 
 
 #By default, the code runs in manuelnvro OM 16. To change the computer change the following folders.
 #OpenIPSL Location
-OpenIPSL = "/home/manuelnvro/dev/Gitted/DockerTraining/OpenIPSL/"
+OpenIPSL = "/home/manuelnvro/dev/Gitted/DockerTraining/OpenIPSL-master/"
 #GitHub Location
 GitHubOpenIPSL = "https://github.com/marcelofcastro/OpenIPSL.git"
-OpenIPSLPackage = "/home/manuelnvro/dev/Gitted/DockerTraining/OpenIPSL/OpenIPSL/package.mo"
+OpenIPSLPackage = "/home/manuelnvro/dev/Gitted/DockerTraining/OpenIPSL-master/OpenIPSL/package.mo"
 #Working Directory
-WorkingDir = "/home/manuelnvro/dev/Gitted/DockerTraining/SampleModel/WorkingDir/"
+WorkingDir = "/home/manuelnvro/dev/Gitted/DockerTraining/CI/WorkingDir/"
 
 
-# In[3]:
+# In[7]:
 
 
 print(omc.sendExpression("getVersion()"))
 print("Open Modelica Docker Trial Simulation Start...")
 
 
-# In[4]:
+# In[12]:
 
 
 #Delete old results
