@@ -6,8 +6,10 @@ services: docker
 
 before_install:
   #- docker pull manuelnvro/dockertraining
-  - docker pull hello-world
+  #- docker pull hello-world
+  - docker pull ubuntu 
   
 script:
   #- docker run -i -t -v $(pwd):/OpenIPSL manuelnvro/dockertraining:1.0 sh -c "python /CI/helloworld.py"
-  - docker run hello-world
+  #- docker run hello-world working
+  - docker run -it ubuntu bash
