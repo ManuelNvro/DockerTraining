@@ -28,9 +28,9 @@ RUN python -m pip install -U https://github.com/OpenModelica/OMPython/archive/ma
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add User
-RUN useradd -m -s /bin/bash manuelnvro
-RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
+##RUN useradd -m -s /bin/bash manuelnvro
+##RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
-USER manuelnvro
-ENV USER manuelnvro
-WORKDIR /home/manuelnvro
+##USER manuelnvro
+##ENV USER manuelnvro
+##WORKDIR /home/manuelnvro
