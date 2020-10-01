@@ -5,7 +5,7 @@ python:
 services: docker
 
 before_install:
-  - docker pull manuelnvro/dockertraining:1.0
+  - docker pull manuelnvro/dockertraining
   
 script:
   - docker run -i -t -v $(pwd):/OpenIPSL manuelnvro/dockertraining:1.0 sh -c "python /OpenIPSL/CI/helloworld.py"
