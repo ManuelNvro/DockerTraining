@@ -5,11 +5,11 @@ python:
 services: docker
 
 before_install:
-  #- docker pull manuelnvro/dockertraining
+  - docker pull manuelnvro/dockertraining:1.1
   #- docker pull hello-world
-  - docker pull ubuntu 
+  #- docker pull ubuntu 
   
 script:
-  #- docker run -i -t -v $(pwd):/OpenIPSL manuelnvro/dockertraining:1.0 sh -c "python /CI/helloworld.py"
+  - docker run -i -t -v $(pwd):/OpenIPSL manuelnvro/dockertraining:1.0 sh -c "python /CI/helloworld.py"
   #- docker run hello-world working
-  - docker run -it ubuntu bash
+  #- docker run -it ubuntu bash
