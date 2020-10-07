@@ -1,6 +1,7 @@
 FROM phusion/baseimage:0.9.22
 MAINTAINER Manuel Navarro Catalan "manosnavarro@gmail.com"
 
+
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
@@ -33,4 +34,4 @@ RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
 USER manuelnvro
 ENV USER manuelnvro
-WORKDIR /home/manuelnvro
+WORKDIR /home/manuelnvro/dev/Gitted/DockerTraining

@@ -5,12 +5,12 @@
 
 from OMPython import OMCSessionZMQ
 omc = OMCSessionZMQ()
-from modelicares import SimRes
-import pandas as pd
-import numpy as np
+#from modelicares import SimRes
+#import pandas as pd
+#import numpy as np
 import os
-import shutil
-import git
+#import shutil
+#import git
 
 
 
@@ -46,10 +46,10 @@ def windturbinesUnit():
 
 #Main Code
 #Deleting old OpenIPSL library version
-try:
-    shutil.rmtree(f""+OpenIPSL+"")
-except:
-   pass
+#try:
+#    shutil.rmtree(f""+OpenIPSL+"")
+#except:
+#   pass
 #Pulling latest OpenIPSL library version
 print('Pulling latest OpenIPSL library version...\n')
 #git.Git(""+OpenModelica+"").clone(""+GitHubOpenIPSL+"")

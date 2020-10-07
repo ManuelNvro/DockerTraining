@@ -2,25 +2,19 @@ import os
 from OMPython import OMCSessionZMQ
 
 class unitTests():
-    '''
-    Python class used to run CI tests
-    '''
     def __init__(self, rootPath):
-        '''
-        Constructor starts omc and loads MSL
-        '''
         self.rootPath = rootPath
         self.omc = OMCSessionZMQ()
-        os.chdir(self.rootPath)
+        os.chdir(rootPath)
         self.omc.sendExpression("loadModel(Modelica)")
-
 
     def loadLibrary(self, libraryName, libraryPath):
         # Attempt to load the library
-        if self.omc.sendExpression('loadFile("%s")' % (libraryPath)):
+        if self.omc.sendExpression('loadFile("%s")' % (self.rootPath + libraryPath)):
             print("Load success: %s" % libraryName)
         else:
             errorMessage = libraryName + " was not loaded! Check the library path:\n" + libraryPath
+            print(errorMessage)
             raise Exception(errorMessage)
 
     def runModelCheck(self, libraryName, libraryPath):
