@@ -10,7 +10,7 @@ class unitTests():
 
     def loadLibrary(self, libraryName, libraryPath):
         # Attempt to load the library
-        if self.omc.sendExpression('loadFile("%s")' % (self.rootPath + libraryPath)):
+        if self.omc.sendExpression('loadFile("%s")' % (libraryPath)):
             print("Load success: %s" % libraryName)
         else:
             errorMessage = libraryName + " was not loaded! Check the library path:\n" + libraryPath

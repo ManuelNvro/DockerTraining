@@ -19,8 +19,9 @@ RUN apt-get update --fix-missing && apt-get upgrade -y -o Dpkg::Options::="--for
     python-numpy \
     omc \
     omlib-modelica-3.2.2
-
 RUN pip install --upgrade pip
+
+#RUN pip install gitpython
 
 # Install OMPython
 RUN python -m pip install -U https://github.com/OpenModelica/OMPython/archive/master.zip
@@ -34,4 +35,4 @@ RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
 USER manuelnvro
 ENV USER manuelnvro
-WORKDIR /home/manuelnvro/dev/Gitted/DockerTraining
+WORKDIR /home/manuelnvro
