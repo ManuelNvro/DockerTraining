@@ -9,3 +9,4 @@ before_install:
 
 script:
 - docker run -v --rm manuelnvro/dockertraining:1.5
+- docker logs -f
