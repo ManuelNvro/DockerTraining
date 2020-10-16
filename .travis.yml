@@ -4,10 +4,10 @@ python:
 
 services: docker
 
-before_install:
+before_script:
   - sudo docker pull manuelnvro/dockertraining:1.5
 
-before_script:
+script:
 - docker run --name citest manuelnvro/dockertraining:1.5
 - docker logs -f citest
 
