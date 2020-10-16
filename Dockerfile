@@ -35,8 +35,8 @@ RUN useradd -m -s /bin/bash manuelnvro
 RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
 
-COPY ./CI /home/manuelnvro
-COPY ./OpenIPSL /home/manuelnvro/OpenIPSL/OpenIPSL
+COPY ./CI /home/manuelnvro/CI
+COPY ./OpenIPSL /home/manuelnvro/OpenIPSL
 
 USER manuelnvro
 ENV USER manuelnvro
