@@ -6,8 +6,9 @@ services: docker
 
 before_script:
   - sudo docker pull manuelnvro/dockertraining:1.4
-  - sudo docker run manuelnvro/dockertraining:1.4 /bin/bash -c "python /CI/modelCheck.py"
+  - sudo docker run manuelnvro/dockertraining:1.4 sh -c "python /CI/modelCheck.py"
   - sudo docker ps -a
 
 script:
 - sudo docker run --rm manuelnvro/dockertraining:1.4
+
