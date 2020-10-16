@@ -8,4 +8,4 @@ before_install:
   - sudo docker pull manuelnvro/dockertraining:1.5
 
 script:
-- docker run --rm manuelnvro/dockertraining:1.5
+- docker run -v --rm manuelnvro/dockertraining:1.5
