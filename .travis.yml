@@ -5,11 +5,7 @@ python:
 services: docker
 
 before_install:
-  - sudo docker pull manuelnvro/dockertraining:1.4
+  - sudo docker pull manuelnvro/dockertraining:1.5
 
-before_script:
-- docker run -i -t -v $(pwd):/CI/ manuelnvro/dockertraining:1.4 sh -c "python helloworld.py"
-
-  
 script:
-- docker run -i -t -v $(pwd):/CI/ manuelnvro/dockertraining:1.4 sh -c "python modelCheck.py"
+- docker run --rm manuelnvro/dockertraining:1.5
