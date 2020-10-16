@@ -8,6 +8,6 @@ before_script:
   - sudo docker build -t manuelnvro/dockertraining:1.5 .
 
 script:
-- docker run --name citest manuelnvro/dockertraining:1.5
-- docker logs -f citest
+- sudo docker run --name citest manuelnvro/dockertraining:1.5
+- sudo docker logs -f citest
 
