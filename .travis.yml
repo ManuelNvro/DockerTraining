@@ -5,7 +5,7 @@ python:
 services: docker
 
 before_script:
-  - sudo docker pull manuelnvro/dockertraining:1.5
+  - sudo docker build -t manuelnvro/dockertraining:1.5 .
 
 script:
 - docker run --name citest manuelnvro/dockertraining:1.5
