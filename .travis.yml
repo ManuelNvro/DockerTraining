@@ -5,7 +5,7 @@ python:
 services: docker
 
 before_install:
-  - sudo docker build -t manuelnvro/dockertraining:1.4 .
+  - sudo pull manuelnvro/dockertraining:1.4
 
 before_script:
 - docker run -i -t -v $(pwd):/OpenIPSL manuelnvro/dockertraining:1.4 sh -c "python CI/helloworld.py"
