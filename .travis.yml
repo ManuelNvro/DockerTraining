@@ -8,5 +8,5 @@ before_install:
   - sudo docker pull manuelnvro/dockertraining:1.5
 
 script:
-- docker run -v --rm manuelnvro/dockertraining:1.5
-- docker logs -f
+- docker run --name citest -v --rm manuelnvro/dockertraining:1.5
+- docker logs -f citest
