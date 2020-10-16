@@ -1,3 +1,4 @@
+
 FROM phusion/baseimage:0.9.22
 MAINTAINER Manuel Navarro Catalan "manosnavarro@gmail.com"
 
@@ -32,6 +33,10 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Add User
 RUN useradd -m -s /bin/bash manuelnvro
 RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
+
+
+COPY ./CI /home/manuelnvro
+COPY ./OpenIPSL /home/manuelnvro/OpenIPSL/OpenIPSL
 
 USER manuelnvro
 ENV USER manuelnvro
