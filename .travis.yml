@@ -8,5 +8,5 @@ before_script:
   - sudo docker pull manuelnvro/dockertraining:1.5
 
 script:
-- sudo docker run -i -t manuelnvro/dockertraining:1.5
+- sudo docker run -a stdin manuelnvro/dockertraining:1.5
 
