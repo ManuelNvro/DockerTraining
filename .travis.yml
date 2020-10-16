@@ -8,8 +8,8 @@ before_install:
   - sudo docker pull manuelnvro/dockertraining:1.4
 
 before_script:
-- docker run -i -t -v $(pwd):/home/manuelnvro/CI/ manuelnvro/dockertraining:1.4 sh -c "python helloworld.py"
+- docker run -i -t -v $(pwd):/CI/ manuelnvro/dockertraining:1.4 sh -c "python helloworld.py"
 
   
 script:
-- docker run -i -t -v $(pwd):/home/manuelnvro/CI/ manuelnvro/dockertraining:1.4 sh -c "python modelCheck.py"
+- docker run -i -t -v $(pwd):/CI/ manuelnvro/dockertraining:1.4 sh -c "python modelCheck.py"
