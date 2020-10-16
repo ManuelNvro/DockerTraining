@@ -6,7 +6,7 @@ services: docker
 
 before_script:
   - sudo docker pull manuelnvro/dockertraining:1.4
-  - sudo docker run manuelnvro/dockertraining:1.4 sh -c "pwd"
+  - sudo docker run manuelnvro/dockertraining:1.4 sh -c "python /CI/modelCheck.py"
 
 
 script:
