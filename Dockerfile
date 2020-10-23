@@ -40,4 +40,7 @@ COPY ./OpenIPSL /home/manuelnvro/OpenIPSL
 
 USER manuelnvro
 ENV USER manuelnvro
-WORKDIR /home/manuelnvro
+WORKDIR /home/manuelnvro/CI/
+
+CMD [ "python", "./modelCheck.py" ]
+
