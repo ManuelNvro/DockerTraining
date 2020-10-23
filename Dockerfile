@@ -35,12 +35,12 @@ RUN useradd -m -s /bin/bash manuelnvro
 RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
 
-COPY ./CI /home/manuelnvro/CI
-COPY ./OpenIPSL /home/manuelnvro/OpenIPSL
+COPY ./OpenIPSLVerification/VerificationRoutines/CI /home/manuelnvro/CI
+COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL
 
 USER manuelnvro
 ENV USER manuelnvro
 WORKDIR /home/manuelnvro/CI/
 
-CMD [ "python", "./modelCheck.py" ]
+#CMD [ "python", "./modelCheck.py" ]
 

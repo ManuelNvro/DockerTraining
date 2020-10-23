@@ -12,7 +12,7 @@ DEBUG_FLAGS=-Os
 CFLAGS=$(CFLAGS_BASED_ON_INIT_FILE) $(DEBUG_FLAGS) -fPIC -mfpmath=sse -fno-dollars-in-identifiers ${MODELICAUSERCFLAGS}   
 CPPFLAGS= -I"/usr/bin/../include/omc/c" -I. -DOPENMODELICA_XML_FROM_FILE_AT_RUNTIME -DOMC_MODEL_PREFIX=OpenIPSL_Examples_Wind_PSSE_WT4G_WT4G1 -DOMC_NUM_MIXED_SYSTEMS=0 -DOMC_NUM_LINEAR_SYSTEMS=0 -DOMC_NUM_NONLINEAR_SYSTEMS=3 -DOMC_NDELAY_EXPRESSIONS=0 -DOMC_NVAR_STRING=0
 LDFLAGS=-L"/usr/bin/../lib/x86_64-linux-gnu/omc" -L"/usr/bin/../lib" -Wl,-rpath,"/usr/bin/../lib/x86_64-linux-gnu/omc" -Wl,-rpath,"/usr/bin/../lib"     -Wl,--no-as-needed -Wl,--disable-new-dtags -lSimulationRuntimeC -llapack -lblas -lm -lm -lomcgc -lpthread -rdynamic -Wl,--no-undefined 
-DIREXTRA=-L"/home/manuelnvro/dev/Gitted/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Examples/Wind/PSSE/WT4G"
+DIREXTRA=-L"/home/manuelnvro/dev/Gitted/DockerTraining/OpenIPSLVerification/VerificationRoutines/OpenIPSL/OpenIPSL/Examples/Wind/PSSE/WT4G"
 MAINFILE=OpenIPSL.Examples.Wind.PSSE.WT4G.WT4G1.c
 MAINOBJ=OpenIPSL.Examples.Wind.PSSE.WT4G.WT4G1.o
 CFILES=OpenIPSL.Examples.Wind.PSSE.WT4G.WT4G1_functions.c OpenIPSL.Examples.Wind.PSSE.WT4G.WT4G1_records.c \
