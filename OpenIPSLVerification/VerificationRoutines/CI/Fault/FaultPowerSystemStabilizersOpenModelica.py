@@ -22,7 +22,7 @@ RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 
 
-#By default, the code runs in manuelnvro Dell using Dymola 2020. To change the computer change the following folders.
+
 #OpenIPSL Location
 OpenIPSL = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/"
 #GitHub Location

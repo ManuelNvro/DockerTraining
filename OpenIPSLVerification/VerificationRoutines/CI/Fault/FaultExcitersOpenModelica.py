@@ -16,12 +16,10 @@ import git
 
 # get current directory and set it to the beginning of the repository 
 RepoDir = os.getcwd() 
-print(RepoDir)
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
-print(RepoDir)
 
 
 
