@@ -10,28 +10,18 @@ import os
 import shutil
 
 # get current directory and set it to the beginning of the repository 
-RepoDir = os.getcwd() 
+RepoDir = os.getcwd()
+print(RepoDir) 
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
-RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
-RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
+print(RepoDir)
 
 #OpenIPSL Location
-OpenIPSL = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/"
-#GitHub Location
-GitHubOpenIPSL = "https://github.com/marcelofcastro/OpenIPSL.git"
-OpenIPSLPackage = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenIPSL/OpenIPSL/package.mo"
-OpenModelica = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/"
+OpenIPSL = RepoDir + "/OpenIPSL/"
+OpenIPSLPackage = RepoDir + "/OpenIPSL/OpenIPSL/package.mo"
 #Working Directory
-FExcitersWorkingDir = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/WorkingDir/Fault/Exciters/"
-#Load Variation Folder Locations
-LoadVariationSource = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/LoadVariation/AuxiliaryModels/Load_variation.mo"
-LoadVariationDestinationPath = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Loads/PSSE/"
-LoadVariationDestination = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Loads/PSSE/Load_variation.mo"
-# Power Fault Folder Locations
-PowerFaultSource = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/LoadVariation/AuxiliaryModels/PwFault.mo"
-PowerFaultDestinationPath = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Events/"
-PowerFaultDestination = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Events/PwFault.mo"
+FExcitersWorkingDir = RepoDir + "/OpenModelica/WorkingDir/Fault/Exciters/"
+print(FExcitersWorkingDir)
 
 print(omc.sendExpression("getVersion()"))
 
@@ -62,12 +52,27 @@ exciters = { 'names' : ["AC7B","AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "
 
 #For loop that will iterate between machines, simulate, and create the .csv file
 for exciterNumber, exciterName in enumerate(exciters['names']):
-    print(f"Fault {exciterName} Simulation Start...")
+    #print(f"Fault {exciterName} Simulation Start...")
+    #exciterName = "ESAC1A"
+    #one = omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
+    #print(one)
+    #two = omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
+    #print(two)
+    #three = omc.sendExpression("instantiateModel(OpenIPSL)")
+    #print(three)
+    #four = omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
+    #print(four)
+    #sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
+    #print(f"{exciterName} Simulation Finished...")
     try:
         omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
+        print("1")
         omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
+        print("2")
         omc.sendExpression("instantiateModel(OpenIPSL)")
+        print("3")
         omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
+        print("4")
         sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
         print(f"{exciterName} Simulation Finished...")
     except:
