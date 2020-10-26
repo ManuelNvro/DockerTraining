@@ -37,9 +37,7 @@ RUN apt install python3.7 -y
 
 RUN apt install python3-pip -y
 
-RUN pip3 install --upgrade pip
-
-#RUN pip install gitpython
+RUN python3.7 -m pip install --upgrade pip
 
 # Install OMPython
 RUN python3.7 -m pip install -U https://github.com/OpenModelica/OMPython/archive/master.zip
@@ -47,8 +45,8 @@ RUN python3.7 -m pip install -U https://github.com/OpenModelica/OMPython/archive
 # Install modelicares
 RUN python3.7 -m pip install modelicares
 
-RUN pip uninstall matplotlib
-RUN pip install matplotlib==2.0.2
+# Installing right version of matplotlib
+RUN python3.7 -m pip install matplotlib==3.0.0
 
 # Clean up APT when done.
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

@@ -6,7 +6,7 @@
 
 from OMPython import OMCSessionZMQ
 omc = OMCSessionZMQ()
-from modelicares import SimRes
+#from modelicares import SimRes
 import pandas as pd
 import numpy as np
 import os
@@ -99,10 +99,10 @@ for machineNumber, machineName in enumerate(machines['names']):
         omc.sendExpression("instantiateModel(OpenIPSL)")
         if machineName == 'CSVGN1':
             omc.sendExpression(f"simulate(OpenIPSL.Examples.Banks.PSSE.{machineName}, stopTime=10.0,method=\"dassl\",numberOfIntervals=500,tolerance=1e-04)")
-            sim = SimRes(""+FMachinesWorkingDir+f"{machineName}/OpenIPSL.Examples.Banks.PSSE.{machineName}_res.mat")
+            #sim = SimRes(""+FMachinesWorkingDir+f"{machineName}/OpenIPSL.Examples.Banks.PSSE.{machineName}_res.mat")
         else:
             omc.sendExpression(f"simulate(OpenIPSL.Examples.Machines.PSSE.{machineName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
-            sim = SimRes(""+FMachinesWorkingDir+f"{machineName}/OpenIPSL.Examples.Machines.PSSE.{machineName}_res.mat")
+            #sim = SimRes(""+FMachinesWorkingDir+f"{machineName}/OpenIPSL.Examples.Machines.PSSE.{machineName}_res.mat")
         print(f"{machineName} Simulation Finished...")
     except:
         print(f"{machineName} simulation error or model not found...")
