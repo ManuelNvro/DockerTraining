@@ -52,18 +52,18 @@ exciters = { 'names' : ["AC7B","AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "
 
 #For loop that will iterate between machines, simulate, and create the .csv file
 for exciterNumber, exciterName in enumerate(exciters['names']):
-    #print(f"Fault {exciterName} Simulation Start...")
-    #exciterName = "ESAC1A"
-    #one = omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
-    #print(one)
-    #two = omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
-    #print(two)
-    #three = omc.sendExpression("instantiateModel(OpenIPSL)")
-    #print(three)
-    #four = omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
-    #print(four)
-    #sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
-    #print(f"{exciterName} Simulation Finished...")
+    print(f"Fault {exciterName} Simulation Start...")
+    exciterName = "ESAC1A"
+    one = omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
+    print(one)
+    two = omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
+    print(two)
+    three = omc.sendExpression("instantiateModel(OpenIPSL)")
+    print(three)
+    four = omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
+    print(four)
+    sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
+    print(f"{exciterName} Simulation Finished...")
     try:
         print("hello")
         omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
