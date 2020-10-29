@@ -6,9 +6,9 @@ services: docker
 
 before_script:
   - sudo docker pull manuelnvro/dockertraining:1.5
-  - sudo docker run manuelnvro/dockertraining:1.5 sh -c "cd Fault; python modelCheck.py"
+  - sudo docker run manuelnvro/dockertraining:1.5 sh -c "cd Fault; python3.7 modelCheck.py"
 
 
 script:
-- sudo docker run --rm manuelnvro/dockertraining:1.4
+- sudo docker run --rm manuelnvro/dockertraining:1.5
 
