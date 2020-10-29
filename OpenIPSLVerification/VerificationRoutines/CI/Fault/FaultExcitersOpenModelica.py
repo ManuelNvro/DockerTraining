@@ -50,9 +50,9 @@ exciters = { 'names' : ["AC7B","AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "
                         "eXAC1.EFD", "eXAC2.EFD", "eXAC3.EFD", "eXDC2.EFD", "eXPIC1.EFD", "eXST1.EFD", "eXST3.EFD", "iEEET1.EFD", "iEEET2.EFD", 
                         "iEEET3.EFD", "iEEET5.EFD", "rEXSYS.EFD", "sCRX.EFD", "sEXS.EFD", "sT6B.EFD"]}
 
-print("Test Start")
-print(f"Fault {exciterName} Simulation Start...")
+print('')
 exciterName = "ESAC1A"
+print(f"Fault {exciterName} Simulation Start...")
 one = omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
 print(one)
 two = omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
@@ -63,6 +63,72 @@ four = omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciter
 print(four)
 sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
 print(f"{exciterName} Simulation Finished...")
+
+#For loop that will iterate between machines, simulate, and create the .csv file
+for exciterNumber, exciterName in enumerate(exciters['names']):
+    
+    try:
+        print(f"{exciterName} Simulation Start...")
+        omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
+        omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
+        omc.sendExpression("instantiateModel(OpenIPSL)")
+        omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
+        sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
+        print(f"{exciterName} Simulation Finished...")
+    except:
+        print(f"{exciterName} simulation error or model not found...\n")
+    try:
+        #Selecting Variables
+        print(".csv Writing Start...") 
+        try:
+            print('Verifying if it is a GENROU model...')
+            #Selecting Variables
+            variables = ['Time', exciters['delta'][0], exciters['pelec'][0], exciters['pmech'][0], exciters['speed'][0], exciters['efd'][exciterNumber], 'GEN1.V', 'LOAD.V', 'GEN2.V', 'FAULT.V' ]
+            df_variables = pd.DataFrame([], columns = variables)
+            for var in variables:
+                df_variables.drop(var, axis = 1, inplace = True)
+                #Change from Radians to Degrees
+                if var == exciters['delta'][0]:
+                    df_variables[var] = np.array(sim[var].values()*(180/np.pi))    
+                else:
+                    #check if a variable does not change during the simulation and then and make a ones array and multiply by the value
+                    try:
+                        df_variables[var] = np.array(sim[var].values())
+                    except:
+                        first = np.array(sim[var].values())
+                        df_variables[var] = first[0] * np.ones(df_variables['Time'].size)
+            print(f"{exciterName} Variables OK...")
+            #Changing current directory
+            os.chdir(f""+FExcitersWorkingDir+"")
+            df_variables.to_csv(f'{exciterName}.csv', index = False)          
+            print(f"{exciterName} Write OK...")
+        except:
+            print('Not a GENROU model...')
+            print('Verifying if it is a GENROE model...')
+            #Selecting Variables
+            variables = ['Time', exciters['delta'][1], exciters['pelec'][1], exciters['pmech'][1], exciters['speed'][1],exciters['efd'][exciterNumber] , 'GEN1.V', 'LOAD.V', 'GEN2.V', 'FAULT.V' ]
+            df_variables = pd.DataFrame([], columns = variables)
+            for var in variables:
+                df_variables.drop(var, axis = 1, inplace = True)
+                #Change from Radians to Degrees
+                if var == exciters['delta'][1]:
+                    df_variables[var] = np.array(sim[var].values()*(180/np.pi))    
+                else:
+                    #check if a variable does not change during the simulation and then and make a ones array and multiply by the value
+                    try:
+                        df_variables[var] = np.array(sim[var].values())
+                    except:
+                        first = np.array(sim[var].values())
+                        df_variables[var] = first[0] * np.ones(df_variables['Time'].size)
+            print(f"{exciterName} Variables OK...")
+            #Changing current directory
+            os.chdir(f""+FExcitersWorkingDir+"")
+            df_variables.to_csv(f'{exciterName}.csv', index = False)          
+            print(f"{exciterName} Write OK...")
+    except:
+        print(f"{exciterName} variable error...\n")
+    print("Delete OK...\n")        
+print('Fault Exciter Examples Open Modelica Simulation OK...')
 
 try:
     print("Closing Open Modelica...")
