@@ -1,12 +1,12 @@
 language: bash
 python:
-  - "3.8"
+  - "3.7"
 
 services: docker
 
 before_script:
-  - sudo docker pull manuelnvro/dockertraining:1.4
-  - sudo docker run manuelnvro/dockertraining:1.4 sh -c "cd CI; python modelCheck.py"
+  - sudo docker pull manuelnvro/dockertraining:1.5
+  - sudo docker run manuelnvro/dockertraining:1.5 sh -c "cd Fault; python modelCheck.py"
 
 
 script:
