@@ -65,6 +65,7 @@ for exciterNumber, exciterName in enumerate(exciters['names']):
     #sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
     #print(f"{exciterName} Simulation Finished...")
     try:
+        print("hello")
         omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
         print("1")
         omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
