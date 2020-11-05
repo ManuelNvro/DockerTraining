@@ -5,10 +5,10 @@ python:
 services: docker
 
 before_script:
-  - sudo docker pull manuelnvro/dockertraining:1.5
-  - sudo docker run manuelnvro/dockertraining:1.5 sh -c "python3.7 modelCheck.py"
+  - sudo docker pull manuelnvro/dockertraining:1.6
+  - sudo docker run manuelnvro/dockertraining:1.6 sh -c "python3.7 modelCheck.py"
 
 
 script:
-- sudo docker run manuelnvro/dockertraining:1.5 sh -c "cd Fault; python3.7 FaultExcitersOpenModelica.py"
+- sudo docker run manuelnvro/dockertraining:1.6 sh -c "python3.7 PythonRunAllOpenModelica.py"
 
