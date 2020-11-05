@@ -11,20 +11,15 @@ import shutil
 
 # get current directory and set it to the beginning of the repository 
 RepoDir = os.getcwd()
-print(RepoDir) 
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
-print(RepoDir)
 
 #OpenIPSL Location
 OpenIPSL = RepoDir + "/OpenIPSL/"
 OpenIPSLPackage = RepoDir + "/OpenIPSL/OpenIPSL/package.mo"
 #Working Directory
-FExcitersWorkingDir = RepoDir + "/OpenModelica/WorkingDir/Fault/Exciters/"
-print(FExcitersWorkingDir)
-
+FExcitersWorkingDir = RepoDir + "/WorkingDir/Fault/Exciters/"
 print(omc.sendExpression("getVersion()"))
-
 
 #Creation of matrix with names, paths and variables
 exciters = { 'names' : ["AC7B","AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "ESST1A", "ESST3A", "ESST4B", 
@@ -50,19 +45,16 @@ exciters = { 'names' : ["AC7B","AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "
                         "eXAC1.EFD", "eXAC2.EFD", "eXAC3.EFD", "eXDC2.EFD", "eXPIC1.EFD", "eXST1.EFD", "eXST3.EFD", "iEEET1.EFD", "iEEET2.EFD", 
                         "iEEET3.EFD", "iEEET5.EFD", "rEXSYS.EFD", "sCRX.EFD", "sEXS.EFD", "sT6B.EFD"]}
 
-print('')
-exciterName = "ESAC1A"
-print(f"Fault {exciterName} Simulation Start...")
-one = omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
-print(one)
-two = omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
-print(two)
-three = omc.sendExpression("instantiateModel(OpenIPSL)")
-print(three)
-four = omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
-print(four)
-sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
-print(f"{exciterName} Simulation Finished...")
+#Delete old results
+try:
+    shutil.rmtree(''+FExcitersWorkingDir+'')
+except:
+    pass
+#Create Exciters folder
+os.makedirs(''+FExcitersWorkingDir+'')
+os.chdir(f""+FExcitersWorkingDir+"")
+for exciterNumber, exciterName in enumerate(exciters['names']):
+    os.makedirs(f'{exciterName}')
 
 #For loop that will iterate between machines, simulate, and create the .csv file
 for exciterNumber, exciterName in enumerate(exciters['names']):
@@ -127,7 +119,11 @@ for exciterNumber, exciterName in enumerate(exciters['names']):
             print(f"{exciterName} Write OK...")
     except:
         print(f"{exciterName} variable error...\n")
-    print("Delete OK...\n")        
+    try:
+        shutil.rmtree(""+FExcitersWorkingDir+f"{exciterName}/")
+        print("Delete OK...\n")
+    except:
+        print("Error...\n")         
 print('Fault Exciter Examples Open Modelica Simulation OK...')
 
 try:

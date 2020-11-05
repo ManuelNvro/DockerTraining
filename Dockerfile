@@ -2,7 +2,6 @@
 FROM phusion/baseimage:0.9.22
 MAINTAINER Manuel Navarro Catalan "manosnavarro@gmail.com"
 
-
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
@@ -39,7 +38,6 @@ RUN apt install python3-pip -y
 
 RUN python3.7 -m pip install --upgrade pip
 
-
 # Install OMPython
 RUN python3.7 -m pip install -U https://github.com/OpenModelica/OMPython/archive/master.zip
 
@@ -58,9 +56,9 @@ RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
 COPY ./OpenIPSLVerification/VerificationRoutines/CI /home/manuelnvro/CI
 COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL
-COPY ./OpenIPSLVerification/VerificationRoutines/OpenModelica /home/manuelnvro/OpenModelica
+COPY ./OpenIPSLVerification/VerificationRoutines/WorkingDir /home/manuelnvro/WorkingDir
 
-# Add user permissions
+# Change user permissions
 RUN chmod -R ugo+rwx /home/manuelnvro
 
 USER manuelnvro
