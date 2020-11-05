@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[56]:
-
-
 from OMPython import OMCSessionZMQ
 omc = OMCSessionZMQ()
 from modelicares import SimRes
@@ -11,78 +8,34 @@ import pandas as pd
 import numpy as np
 import os
 import shutil
-import git
 
 # get current directory and set it to the beginning of the repository 
-RepoDir = os.getcwd() 
-RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
-RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
+RepoDir = os.getcwd()
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 
 #OpenIPSL Location
-OpenIPSL = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/"
-#GitHub Location
-GitHubOpenIPSL = "https://github.com/marcelofcastro/OpenIPSL.git"
-OpenIPSLPackage = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenIPSL/OpenIPSL/package.mo"
-OpenModelica = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/"
+OpenIPSL = RepoDir + "/OpenIPSL/"
+OpenIPSLPackage = RepoDir + "/OpenIPSL/OpenIPSL/package.mo"
 #Working Directory
-FWindTurbinesWorkingDir = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/WorkingDir/Fault/WindTurbines/"
-#Load Variation Folder Locations
-LoadVariationSource = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/LoadVariation/AuxiliaryModels/Load_variation.mo"
-LoadVariationDestinationPath = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Loads/PSSE/"
-LoadVariationDestination = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Loads/PSSE/Load_variation.mo"
-# Power Fault Folder Locations
-PowerFaultSource = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/LoadVariation/AuxiliaryModels/PwFault.mo"
-PowerFaultDestinationPath = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Events/"
-PowerFaultDestination = RepoDir + "/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Events/PwFault.mo"
-
-
-# In[58]:
-
-
+FWindTurbinesWorkingDir = RepoDir + "/WorkingDir/Fault/WindTurbines/"
 print(omc.sendExpression("getVersion()"))
-
-
-
-# In[59]:
-
-
-#Deleting old OpenIPSL library version
-#try:
-#    shutil.rmtree(f""+OpenIPSL+"")
-#except:
-#    pass
-#Pulling latest OpenIPSL library version
-#print('Pulling latest OpenIPSL library version...\n')
-#git.Git(""+OpenModelica+"").clone(""+GitHubOpenIPSL+"")
-#print("Fault Open Modelica Wind Turbines Simulation Start...\n")
-
-
-# In[60]:
-
 
 #Creation of matrix with names, paths and variables
 wturbines = { 'names' : ["WT4G1","WT4E1"],
             'path' : ["OpenIPSL.Examples.Wind.PSSE.WT4G.WT4G1","OpenIPSL.Examples.Wind.PSSE.WT4G.WT4E1"],
             'p' : ['wT4G1.P', 'wT4E1.P'],
            'q' : ['wT4G1.Q', 'wT4E1.Q']}
-
-
-# In[63]:
-
-
 #Delete old results
-shutil.rmtree(''+FWindTurbinesWorkingDir+'')
-#Create folder
+try:
+    shutil.rmtree(''+FWindTurbinesWorkingDir+'')
+except:
+    pass
+#Create Exciters folder
 os.makedirs(''+FWindTurbinesWorkingDir+'')
 os.chdir(f""+FWindTurbinesWorkingDir+"")
 for wturbineNumber, wturbineName in enumerate(wturbines['names']):
     os.makedirs(f'{wturbineName}')
-
-
-# In[64]:
-
 
 #For loop that will iterate between machines, simulate, and create the .csv file
 for wturbineNumber, wturbineName in enumerate(wturbines['names']):
@@ -117,14 +70,11 @@ for wturbineNumber, wturbineName in enumerate(wturbines['names']):
     except:
         print('Variable Error...\n')
     try:
-        #shutil.rmtree(""+FWindTurbinesWorkingDir+f"{wturbineName}/")
+        shutil.rmtree(""+FWindTurbinesWorkingDir+f"{wturbineName}/")
         print("Delete OK...\n")
     except:
         print('Delete Error...\n')        
 print('Fault Wind Turbines Examples Open Modelica Simulation OK...')
-
-
-# In[ ]:
 
 
 try:
