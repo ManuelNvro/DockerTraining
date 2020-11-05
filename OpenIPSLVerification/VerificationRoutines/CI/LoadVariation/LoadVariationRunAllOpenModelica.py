@@ -11,8 +11,6 @@ import shutil
 
 # get current directory and set it to the beginning of the repository 
 RepoDir = os.getcwd() 
-print(RepoDir)
-
 #This is intended to be used in the manuelnvro Dell using Dymola 2020
 LoadVariation = RepoDir 
 

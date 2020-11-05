@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
-
 from OMPython import OMCSessionZMQ
 omc = OMCSessionZMQ()
 from modelicares import SimRes
@@ -11,18 +8,11 @@ import pandas as pd
 import numpy as np
 import os
 import shutil
-import git
 
-
-# In[3]:
-
-
+# get current directory and set it to the beginning of the repository 
+RepoDir = os.getcwd() 
 #This is intended to be used in the manuelnvro Dell using Dymola 2020
-ReferenceStep = "/home/manuelnvro/dev/Gitted/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/ReferenceStep/"
-
-
-# In[4]:
-
+ReferenceStep = RepoDir 
 
 #Run Exciters
 print('---------------------------------------------------------- Reference Step Open Modelica Exciters Testing ----------------------------------------------------------')
@@ -33,10 +23,6 @@ try:
 except:
     print('Error in Reference Step Open Modelica Exciters Testing...')
 
-
-# In[5]:
-
-
 #Run Machines
 print('---------------------------------------------------------- Reference Step Open Modelica Machines Testing ----------------------------------------------------------')
 try:
@@ -45,10 +31,6 @@ try:
     print('Reference Step Open Modelica Machines Testing OK...')
 except:
     print('Error in Reference Step Open Modelica in Machines Testing...')
-
-
-# In[5]:
-
 
 #Run Turbine Governors
 print('---------------------------------------------------------- Reference Step Open Modelica Turbine Governors Testing ----------------------------------------------------------')
@@ -59,10 +41,6 @@ try:
 except:
     print('Error in Reference Step Open Modelica Turbine Governors Testing...')
 
-
-# In[8]:
-
-
 #Run Power System Stabilizer
 print('---------------------------------------------------------- Reference Step Open Modelica Power System Stabilizers Testing ----------------------------------------------------------')
 try:
@@ -72,10 +50,6 @@ try:
 except:
     print('Error in Reference Step Open Modelica Power System Stabilizer Testing...')
 
-
-# In[6]:
-
-
 #Run Wind Turbines
 print('---------------------------------------------------------- Reference Step Open Modelica Wind Turbines Testing ----------------------------------------------------------')
 try:
@@ -84,10 +58,6 @@ try:
     print('Reference Step Open Modelica Wind Turbines Testing OK...')
 except:
     print('Error in Reference Step Open Modelica Wind Turbines Testing...')
-
-
-# In[ ]:
-
 
 print('---------------------------------------------------------- End of Reference Step Open Modelica Simulations ----------------------------------------------------------')
 

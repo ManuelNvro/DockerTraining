@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[7]:
-
-
 from OMPython import OMCSessionZMQ
 omc = OMCSessionZMQ()
 from modelicares import SimRes
@@ -11,22 +8,16 @@ import pandas as pd
 import numpy as np
 import os
 import shutil
-import git
 
-
-# In[9]:
-
+RepoDir = os.getcwd() 
+print(RepoDir)
 
 #This is intended to be used in the manuelnvro Dell using Dymola 2020
-Fault = "/home/manuelnvro/dev/Gitted/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/Fault/"
-LoadVariation = "/home/manuelnvro/dev/Gitted/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/LoadVariation/"
-ReferenceStep = "/home/manuelnvro/dev/Gitted/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/ReferenceStep/"
+Fault = RepoDir + "/Fault/"
+LoadVariation = RepoDir + "/LoadVariation/"
+ReferenceStep = RepoDir + "ReferenceStep/"
 
-
-# In[1]:
-
-
-#Run Exciters
+#Run Fault
 print('---------------------------------------------------------- Open Modelica Fault Testing ----------------------------------------------------------')
 try:
     os.chdir(f""+Fault+"")
@@ -35,11 +26,7 @@ try:
 except:
     print('Error in Fault Testing...')
 
-
-# In[3]:
-
-
-#Run Machines
+#Run Load Variation
 print('---------------------------------------------------------- Open Modelica Load Variation Testing ----------------------------------------------------------')
 try:
     os.chdir(f""+LoadVariation+"")
@@ -48,7 +35,7 @@ try:
 except:
     print('Error in Load Variation Testing...')
 
-#Run Exciters
+#Run Reference Step
 print('---------------------------------------------------------- Open Modelica Reference Step Testing ----------------------------------------------------------')
 try:
     os.chdir(f""+ReferenceStep+"")
@@ -56,10 +43,6 @@ try:
     print('Reference Step Testing OK...')
 except:
     print('Error in Reference Step Testing...')
-
-
-# In[ ]:
-
 
 print('---------------------------------------------------------- End of All Open Modelica Simulations ----------------------------------------------------------')
 
