@@ -4,9 +4,9 @@ static const REAL_ATTRIBUTE dummyREAL_ATTRIBUTE = omc_dummyRealAttribute;
 #if defined(__cplusplus)
 extern "C" {
 #endif
-  #define OpenIPSL_Examples_Controls_PSSE_ES_ESAC1A_INDEX_JAC_NLSJac9 0
-  int OpenIPSL_Examples_Controls_PSSE_ES_ESAC1A_functionJacNLSJac9_column(void* data, threadData_t *threadData, ANALYTIC_JACOBIAN *thisJacobian, ANALYTIC_JACOBIAN *parentJacobian);
-  int OpenIPSL_Examples_Controls_PSSE_ES_ESAC1A_initialAnalyticJacobianNLSJac9(void* data, threadData_t *threadData, ANALYTIC_JACOBIAN *jacobian);
+  #define OpenIPSL_Examples_Controls_PSSE_ES_ESAC1A_INDEX_JAC_NLSJac4 0
+  int OpenIPSL_Examples_Controls_PSSE_ES_ESAC1A_functionJacNLSJac4_column(void* data, threadData_t *threadData, ANALYTIC_JACOBIAN *thisJacobian, ANALYTIC_JACOBIAN *parentJacobian);
+  int OpenIPSL_Examples_Controls_PSSE_ES_ESAC1A_initialAnalyticJacobianNLSJac4(void* data, threadData_t *threadData, ANALYTIC_JACOBIAN *jacobian);
 #if defined(__cplusplus)
 }
 #endif

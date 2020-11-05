@@ -39,6 +39,7 @@ RUN apt install python3-pip -y
 
 RUN python3.7 -m pip install --upgrade pip
 
+
 # Install OMPython
 RUN python3.7 -m pip install -U https://github.com/OpenModelica/OMPython/archive/master.zip
 
@@ -55,10 +56,12 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN useradd -m -s /bin/bash manuelnvro
 RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
-
 COPY ./OpenIPSLVerification/VerificationRoutines/CI /home/manuelnvro/CI
 COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL
 COPY ./OpenIPSLVerification/VerificationRoutines/OpenModelica /home/manuelnvro/OpenModelica
+
+# Add user permissions
+RUN chmod -R ugo+rwx /home/manuelnvro
 
 USER manuelnvro
 ENV USER manuelnvro

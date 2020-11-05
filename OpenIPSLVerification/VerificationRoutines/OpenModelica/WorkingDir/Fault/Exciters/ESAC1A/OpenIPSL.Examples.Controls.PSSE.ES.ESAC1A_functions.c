@@ -26,6 +26,7 @@ modelica_real omc_Modelica_Math_atan3(threadData_t *threadData, modelica_real _u
   modelica_real _y;
   modelica_real _pi2;
   modelica_real _w;
+  modelica_real tmp1;
   _tailrecursive: OMC_LABEL_UNUSED
   // _y has no default value.
   _pi2 = 6.283185307179586;
@@ -38,7 +39,8 @@ modelica_real omc_Modelica_Math_atan3(threadData_t *threadData, modelica_real _u
   }
   else
   {
-    _y = _w + (6.283185307179586) * (((modelica_real)((modelica_integer)floor(0.5 + (0.1591549430918953) * (_y0 - _w)))));
+    tmp1 = _pi2;
+    _y = _w + (_pi2) * (((modelica_real)((modelica_integer)floor((3.141592653589793 + _y0 - _w) / tmp1))));
   }
   _return: OMC_LABEL_UNUSED
   return _y;
@@ -71,32 +73,6 @@ modelica_metatype boxptr_Modelica_SIunits_ComplexPower(threadData_t *threadData,
   return mmc_mk_box3(3, &Modelica_SIunits_ComplexPower__desc, _re, _im);
 }
 
-OpenIPSL_Electrical_SystemBase omc_OpenIPSL_Electrical_SystemBase(threadData_t *threadData, modelica_real omc_S_b, modelica_real omc_fn)
-{
-  OpenIPSL_Electrical_SystemBase tmp1;
-  tmp1._S_b = omc_S_b;
-  tmp1._fn = omc_fn;
-  return tmp1;
-}
-
-modelica_metatype boxptr_OpenIPSL_Electrical_SystemBase(threadData_t *threadData, modelica_metatype _S_b, modelica_metatype _fn)
-{
-  return mmc_mk_box3(3, &OpenIPSL_Electrical_SystemBase__desc, _S_b, _fn);
-}
-
-OpenIPSL_Electrical__omcQSystemBase_24SysData omc_OpenIPSL_Electrical__omcQSystemBase_24SysData(threadData_t *threadData, modelica_real omc_S_b, modelica_real omc_fn)
-{
-  OpenIPSL_Electrical__omcQSystemBase_24SysData tmp1;
-  tmp1._S_b = omc_S_b;
-  tmp1._fn = omc_fn;
-  return tmp1;
-}
-
-modelica_metatype boxptr_OpenIPSL_Electrical__omcQSystemBase_24SysData(threadData_t *threadData, modelica_metatype _S_b, modelica_metatype _fn)
-{
-  return mmc_mk_box3(3, &OpenIPSL_Electrical__omcQSystemBase_24SysData__desc, _S_b, _fn);
-}
-
 DLLExport
 modelica_real omc_OpenIPSL_Electrical_Controls_PSSE_ES_BaseClasses_invFEX(threadData_t *threadData, modelica_real _K_C, modelica_real _Efd0, modelica_real _Ifd0)
 {
@@ -110,6 +86,10 @@ modelica_real omc_OpenIPSL_Electrical_Controls_PSSE_ES_BaseClasses_invFEX(thread
   modelica_real tmp7;
   modelica_real tmp8;
   modelica_real tmp9;
+  modelica_real tmp10;
+  modelica_real tmp11;
+  modelica_real tmp12;
+  modelica_real tmp13;
   _tailrecursive: OMC_LABEL_UNUSED
   // _VE0 has no default value.
   if((_Ifd0 <= 0.0))
@@ -118,28 +98,32 @@ modelica_real omc_OpenIPSL_Electrical_Controls_PSSE_ES_BaseClasses_invFEX(thread
   }
   else
   {
-    tmp1 = _Efd0 + (0.577) * ((_K_C) * (_Ifd0));
-    if(((_K_C) * ((_Ifd0) / tmp1) <= 0.433))
+    tmp1 = _Efd0 + ((0.577) * (_K_C)) * (_Ifd0);
+    if((((_K_C) * (_Ifd0)) / tmp1 <= 0.433))
     {
-      _VE0 = _Efd0 + (0.577) * ((_K_C) * (_Ifd0));
+      _VE0 = _Efd0 + ((0.577) * (_K_C)) * (_Ifd0);
     }
     else
     {
       tmp2 = _Efd0;
       tmp3 = (_K_C) * (_Ifd0);
-      tmp4 = sqrt((tmp2 * tmp2) + (tmp3 * tmp3));
-      tmp5 = _Efd0;
-      tmp6 = (_K_C) * (_Ifd0);
-      tmp7 = sqrt((tmp5 * tmp5) + (tmp6 * tmp6));
-      if((((0.8660254037844387) * ((_K_C) * ((_Ifd0) / tmp4)) > 0.433) && ((0.8660254037844387) * ((_K_C) * ((_Ifd0) / tmp7)) < 0.75)))
+      tmp4 = 0.75;
+      tmp5 = sqrt(((tmp2 * tmp2) + (tmp3 * tmp3)) / tmp4);
+      tmp6 = _Efd0;
+      tmp7 = (_K_C) * (_Ifd0);
+      tmp8 = 0.75;
+      tmp9 = sqrt(((tmp6 * tmp6) + (tmp7 * tmp7)) / tmp8);
+      if(((((_K_C) * (_Ifd0)) / tmp5 > 0.433) && (((_K_C) * (_Ifd0)) / tmp9 < 0.75)))
       {
-        tmp8 = _Efd0;
-        tmp9 = (_K_C) * (_Ifd0);
-        _VE0 = (1.154700538379251) * (sqrt((tmp8 * tmp8) + (tmp9 * tmp9)));
+        tmp10 = _Efd0;
+        tmp11 = (_K_C) * (_Ifd0);
+        tmp12 = 0.75;
+        _VE0 = sqrt(((tmp10 * tmp10) + (tmp11 * tmp11)) / tmp12);
       }
       else
       {
-        _VE0 = (0.5773672055427251) * (_Efd0) + (_K_C) * (_Ifd0);
+        tmp13 = 1.732;
+        _VE0 = (_Efd0 + ((1.732) * (_K_C)) * (_Ifd0)) / tmp13;
       }
     }
   }
@@ -175,21 +159,22 @@ modelica_real omc_OpenIPSL_NonElectrical_Functions_SE(threadData_t *threadData, 
   modelica_real _B;
   modelica_real tmp6;
   modelica_real tmp7;
-  modelica_boolean tmp8;
-  modelica_real tmp9;
+  modelica_real tmp8;
+  modelica_boolean tmp9;
   modelica_real tmp10;
   modelica_real tmp11;
+  modelica_real tmp12;
   _tailrecursive: OMC_LABEL_UNUSED
   // _sys has no default value.
   tmp3 = (modelica_boolean)(_SE2 != 0.0);
   if(tmp3)
   {
-    tmp1 = (_E2) * (_SE2);
-    tmp2 = (_SE1) * ((_E1) / tmp1);
+    tmp1 = (_SE2) * (_E2);
+    tmp2 = ((_SE1) * (_E1)) / tmp1;
     if(!(tmp2 >= 0.0))
     {
       FILE_INFO info = {"",0,0,0,0,0};
-      omc_assert(threadData, info, "Model error: Argument of sqrt(SE1 * E1 / (E2 * SE2)) was %g should be >= 0", tmp2);
+      omc_assert(threadData, info, "Model error: Argument of sqrt(SE1 * E1 / (SE2 * E2)) was %g should be >= 0", tmp2);
     }
     tmp4 = sqrt(tmp2);
   }
@@ -198,20 +183,21 @@ modelica_real omc_OpenIPSL_NonElectrical_Functions_SE(threadData_t *threadData, 
     tmp4 = 0.0;
   }
   _a = tmp4;
-  tmp5 = -1.0 + _a;
-  _A = _E2 + (_E2 - _E1) / tmp5;
-  tmp8 = (modelica_boolean)(fabs(_E1 - _E2) < 1e-15);
-  if(tmp8)
+  tmp5 = _a - 1.0;
+  _A = _E2 - ((_E1 - _E2) / tmp5);
+  tmp9 = (modelica_boolean)(fabs(_E1 - _E2) < 1e-15);
+  if(tmp9)
   {
-    tmp9 = 0.0;
+    tmp10 = 0.0;
   }
   else
   {
-    tmp6 = _E1 - _E2;
-    tmp7 = (-1.0 + _a) / tmp6;
-    tmp9 = (_SE2) * ((_E2) * ((tmp7 * tmp7)));
+    tmp6 = _a - 1.0;
+    tmp7 = _E1 - _E2;
+    tmp8 = (tmp7 * tmp7);
+    tmp10 = (((_SE2) * (_E2)) * ((tmp6 * tmp6))) / tmp8;
   }
-  _B = tmp9;
+  _B = tmp10;
   if(((_SE1 == 0.0) || (_u <= 0.0)))
   {
     _sys = 0.0;
@@ -224,9 +210,9 @@ modelica_real omc_OpenIPSL_NonElectrical_Functions_SE(threadData_t *threadData, 
     }
     else
     {
-      tmp10 = _u - _A;
-      tmp11 = _u;
-      _sys = (_B) * (((tmp10 * tmp10)) / tmp11);
+      tmp11 = _u - _A;
+      tmp12 = _u;
+      _sys = ((_B) * ((tmp11 * tmp11))) / tmp12;
     }
   }
   _return: OMC_LABEL_UNUSED

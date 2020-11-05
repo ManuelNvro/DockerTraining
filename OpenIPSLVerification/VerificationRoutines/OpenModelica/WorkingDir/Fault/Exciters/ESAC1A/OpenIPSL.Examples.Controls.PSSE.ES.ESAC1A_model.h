@@ -26,11 +26,9 @@ extern "C" {
 #define Complex_index 0
 #define Modelica_Math_atan3_index 1
 #define Modelica_SIunits_ComplexPower_index 2
-#define OpenIPSL_Electrical_SystemBase_index 3
-#define OpenIPSL_Electrical__omcQSystemBase_24SysData_index 4
-#define OpenIPSL_Electrical_Controls_PSSE_ES_BaseClasses_invFEX_index 5
-#define OpenIPSL_NonElectrical_Functions_SE_index 6
-#define OpenIPSL_NonElectrical_Functions_SE__exp_index 7
+#define OpenIPSL_Electrical_Controls_PSSE_ES_BaseClasses_invFEX_index 3
+#define OpenIPSL_NonElectrical_Functions_SE_index 4
+#define OpenIPSL_NonElectrical_Functions_SE__exp_index 5
 
 extern void OpenIPSL_Examples_Controls_PSSE_ES_ESAC1A_callExternalObjectDestructors(DATA *_data, threadData_t *threadData);
 #if !defined(OMC_NUM_NONLINEAR_SYSTEMS) || OMC_NUM_NONLINEAR_SYSTEMS>0
