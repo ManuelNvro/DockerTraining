@@ -15,7 +15,7 @@ print(RepoDir)
 #This is intended to be used in the manuelnvro Dell using Dymola 2020
 Fault = RepoDir + "/Fault/"
 LoadVariation = RepoDir + "/LoadVariation/"
-ReferenceStep = RepoDir + "ReferenceStep/"
+ReferenceStep = RepoDir + "/ReferenceStep/"
 
 #Run Fault
 print('---------------------------------------------------------- Open Modelica Fault Testing ----------------------------------------------------------')
@@ -43,6 +43,8 @@ try:
     print('Reference Step Testing OK...')
 except:
     print('Error in Reference Step Testing...')
+
+
 
 print('---------------------------------------------------------- End of All Open Modelica Simulations ----------------------------------------------------------')
 
