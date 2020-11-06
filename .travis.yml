@@ -10,5 +10,5 @@ before_script:
 
 
 script:
-- sudo docker run manuelnvro/dockertraining:1.6 sh -c "python3.7 PythonRunAllOpenModelica.py"
+- sudo docker run manuelnvro/dockertraining:1.6 sh -c "cd Fault; python3.7 FaultRunAllOpenModelica.py"
 
