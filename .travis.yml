@@ -11,6 +11,6 @@ before_script:
 
 script:
 #- sudo docker run manuelnvro/dockertraining:1.6 sh -c "cd Fault; python3.7 FaultRunAllOpenModelica.py"
-- sudo docker run manuelnvro/dockertraining:1.6 sh -c "cd LoadVariation; python3.7 LoadVariationRunAllOpenModelica.py"
+- sudo docker run manuelnvro/dockertraining:1.6 sh -c "cd LoadVariation; python3.7 LoadVariationExcitersOpenModelica.py"
 #- sudo docker run manuelnvro/dockertraining:1.6 sh -c "cd ReferenceStep; python3.7 ReferenceStepExcitersOpenModelica.py"
 
