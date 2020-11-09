@@ -10,7 +10,6 @@ import os
 import shutil
 
 RepoDir = os.getcwd() 
-print(RepoDir)
 
 #This is intended to be used in the manuelnvro Dell using Dymola 2020
 Fault = RepoDir + "/Fault/"
@@ -39,7 +38,7 @@ except:
 print('---------------------------------------------------------- Open Modelica Reference Step Testing ----------------------------------------------------------')
 try:
     os.chdir(f""+ReferenceStep+"")
-    exec(open("ReferenceStepRunAllOpenModelica.py").read())
+    exec(open("ReferenceStepExcitersOpenModelica.py").read())
     print('Reference Step Testing OK...')
 except:
     print('Error in Reference Step Testing...')

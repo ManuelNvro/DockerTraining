@@ -32,7 +32,7 @@ SMIBPartialDestinationPath = RepoDir + "/OpenIPSL/OpenIPSL/Examples/"
 SMIBPartialDestination = RepoDir + "/OpenIPSL/OpenIPSL/Examples/SMIBpartial.mo"
 # Base Exciter Folder Location
 BaseExciterSource = RepoDir + "/CI/ReferenceStep/AuxiliaryModels/BaseExciter.mo"
-BaseExciterDestinationPath = RepoDir + "OpenIPSL/OpenIPSL/Electrical/Controls/PSSE/ES/BaseClasses/"
+BaseExciterDestinationPath = RepoDir + "/OpenIPSL/OpenIPSL/Electrical/Controls/PSSE/ES/BaseClasses/"
 BaseExciterDestination = RepoDir + "/OpenIPSL/OpenIPSL/Electrical/Controls/PSSE/ES/BaseClasses/BaseExciter.mo"
 
 print(omc.sendExpression("getVersion()"))
