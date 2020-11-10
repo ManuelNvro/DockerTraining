@@ -6,13 +6,11 @@ from OMPython import OMCSessionZMQ
 import os
 import sys
 
-#import shutil
-#import git
-
 ###################################################Folder/File Definitions############################################################### 
 # get current directory and set it to the beginning of the repository 
 RepoDir = os.getcwd() 
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
+print(RepoDir)
 #OpenIPSL Location
 OpenIPSL = RepoDir 
 #GitHub Location
