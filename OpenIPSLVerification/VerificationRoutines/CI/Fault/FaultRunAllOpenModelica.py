@@ -23,18 +23,14 @@ ResultDir = ResultDir + "/WorkingDir/"
 compareDir = os.getcwd()
 compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
 compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
-compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
-compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
 
-
-models = { 'exciters' : ["AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "ESST1A", "ESST3A", "ESST4B", 
-                        "EXAC1", "EXAC2", "EXAC3", "EXDC2", "EXPIC1", "EXST1", "EXST3", "IEEET1", "IEEET2", 
-                        "IEEET3", "IEEET5", "REXSYS", "SCRX", "SEXS", "ST6B"],
+models = { 'exciters' : ["ESAC1A", "ESAC2A", "ESDC1A", "ESST1A", "ESST4B", 
+                        "EXAC1", "EXAC2", "EXST1", "IEEET1", "IEEET2", 
+                        "SCRX", "SEXS"],
             'machines' : ["GENROU","GENSAL", "GENCLS", "GENROE", "GENSAE", "CSVGN1"],
-            'turbinegovernors' : ["BBGOV1","GAST", "GAST2A", "GGOV1", "HYGOV", "IEEEG1", "IEESGO", "TGOV1", "WEHGOV", 
-                            "WESGOV", "WSHYDD", "WSHYGP" ],
-           'powersystemstabilizers' : ["PSS2A","PSS2B"],
-            'windturbines' : ["WT4G1","WT4E1"]}
+            'turbinegovernors' : ["GAST", "HYGOV", "IEEEG1", "IEESGO", "TGOV1" ],
+           'powersystemstabilizers' : ["PSS2B"],
+            'windturbines' : ["WT4G1"]}
 
 def modelsCompare(modelList, modelType, simulationType):
     testsFailed = 0
