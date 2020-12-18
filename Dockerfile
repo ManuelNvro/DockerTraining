@@ -66,9 +66,25 @@ RUN useradd -m -s /bin/bash manuelnvro
 RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
 COPY ./OpenIPSLVerification/VerificationRoutines/CI /home/manuelnvro/CI
-COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL
+#COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL
 COPY ./OpenIPSLVerification/VerificationRoutines/WorkingDir /home/manuelnvro/WorkingDir
 COPY ./CSVVerification /home/manuelnvro/CSVVerification
+
+# Install Git
+RUN apt-get update
+RUN	apt install -y git
+#RUN mkdir  /home/manuelnvro/Git \
+#			cd  /home/manuelnvro/Git \
+WORKDIR /home/manuelnvro/OpenIPSL
+RUN git clone https://github.com/OpenIPSL/OpenIPSL.git 
+
+#RUN make
+
+##RUN git clone XYZ 
+##WORKDIR "/XYZ"
+##RUN make
+
+
 
 # Change user permissions
 RUN chmod -R ugo+rwx /home/manuelnvro
