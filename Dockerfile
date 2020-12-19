@@ -20,22 +20,15 @@ RUN apt-get update --fix-missing && apt-get upgrade -y -o Dpkg::Options::="--for
     python-numpy \
     omc \
     omlib-modelica-3.2.2
-    
-  
+
 RUN pip install --upgrade pip
 
 #Install python 3.7  
-
 RUN apt install software-properties-common
-
 RUN add-apt-repository ppa:deadsnakes/ppa
-
 RUN apt update
-
 RUN apt install python3.7 -y
-
 RUN apt install python3-pip -y
-
 RUN python3.7 -m pip install --upgrade pip
 
 # Install OMPython
@@ -73,18 +66,8 @@ COPY ./CSVVerification /home/manuelnvro/CSVVerification
 # Install Git
 RUN apt-get update
 RUN	apt install -y git
-#RUN mkdir  /home/manuelnvro/Git \
-#			cd  /home/manuelnvro/Git \
-WORKDIR /home/manuelnvro/OpenIPSL
+WORKDIR /home/manuelnvro/
 RUN git clone https://github.com/OpenIPSL/OpenIPSL.git 
-
-#RUN make
-
-##RUN git clone XYZ 
-##WORKDIR "/XYZ"
-##RUN make
-
-
 
 # Change user permissions
 RUN chmod -R ugo+rwx /home/manuelnvro
@@ -93,5 +76,4 @@ USER manuelnvro
 ENV USER manuelnvro
 WORKDIR /home/manuelnvro/CI/
 
-#CMD [ "python", "./modelCheck.py" ]
 
