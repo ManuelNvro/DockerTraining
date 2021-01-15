@@ -57,15 +57,11 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN useradd -m -s /bin/bash manuelnvro
 RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
-#RUN pwd
-
 # Install Git & Pull OpenIPSL
 #RUN apt-get update
 #RUN	apt install -y git
 #WORKDIR /home/manuelnvro/
-#RUN git clone https://github.com/OpenIPSL/OpenIPSL.git 
-
-#WORKDIR /
+#RUN git clone https://github.com/OpenIPSL/OpenIPSL.git
 
 COPY ./OpenIPSLVerification/VerificationRoutines/CI /home/manuelnvro/CI
 COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL

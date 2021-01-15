@@ -17,8 +17,6 @@ RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 #OpenIPSL Location
 OpenIPSL = RepoDir + "/OpenIPSL/"
 OpenIPSLPackage = RepoDir + "/OpenIPSL/OpenIPSL/package.mo"
-print(OpenIPSL)
-print(OpenIPSLPackage)
 #Working Directory
 FExcitersWorkingDir = RepoDir + "/WorkingDir/Fault/Exciters/"
 print(omc.sendExpression("getVersion()"))
