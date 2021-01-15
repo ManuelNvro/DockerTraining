@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from OMPython import OMCSessionZMQ
-omc = OMCSessionZMQ()
+#omc = OMCSessionZMQ()
 from modelicares import SimRes
 import pandas as pd
 import numpy as np
@@ -17,14 +17,16 @@ RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 #OpenIPSL Location
 OpenIPSL = RepoDir + "/OpenIPSL/"
 OpenIPSLPackage = RepoDir + "/OpenIPSL/OpenIPSL/package.mo"
+print(OpenIPSL)
+print(OpenIPSLPackage)
 #Working Directory
 FExcitersWorkingDir = RepoDir + "/WorkingDir/Fault/Exciters/"
 print(omc.sendExpression("getVersion()"))
 
 #Creation of matrix with names, paths and variables
-exciters = { 'names' : ["AC7B","AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "ESST1A", "ESST3A", "ESST4B", 
+exciters = { 'names' : ["ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "ESST1A", "ESST3A", "ESST4B", 
                         "EXAC1", "EXAC2", "EXAC3", "EXDC2", "EXPIC1", "EXST1", "EXST3", "IEEET1", "IEEET2", 
-                        "IEEET3", "IEEET5", "REXSYS", "SCRX", "SEXS", "ST6B"],
+                        "IEEET3", "IEEET5", "REXSYS", "SCRX", "SEXS", "ST6B","AC7B","AC8B", ],
             'path' : ["OpenIPSL.Examples.Controls.PSSE.ES.AC7B", "OpenIPSL.Examples.Controls.PSSE.ES.AC8B",
                       "OpenIPSL.Examples.Controls.PSSE.ES.ESAC1A", "OpenIPSL.Examples.Controls.PSSE.ES.ESAC2A",
                       "OpenIPSL.Examples.Controls.PSSE.ES.ESAC6A", "OpenIPSL.Examples.Controls.PSSE.ES.ESDC1A",
@@ -55,6 +57,15 @@ os.makedirs(''+FExcitersWorkingDir+'')
 os.chdir(f""+FExcitersWorkingDir+"")
 for exciterNumber, exciterName in enumerate(exciters['names']):
     os.makedirs(f'{exciterName}')
+libraryPath = RepoDir + "/OpenIPSL/OpenIPSL/package.mo"
+libraryName = "OpenIPSL"
+omc = OMCSessionZMQ()
+if omc.sendExpression('loadFile("%s")' % (libraryPath)):
+    print("Load success: %s" % libraryName + "\n")
+else:
+    errorMessage = libraryName + " was not loaded! Check the library path:\n" + libraryPath
+    print(errorMessage)
+    raise Exception(errorMessage)
 
 #For loop that will iterate between machines, simulate, and create the .csv file
 for exciterNumber, exciterName in enumerate(exciters['names']):
@@ -64,7 +75,7 @@ for exciterNumber, exciterName in enumerate(exciters['names']):
         omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
         omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
         omc.sendExpression("instantiateModel(OpenIPSL)")
-        omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
+        result = omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
         sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
         print(f"{exciterName} Simulation Finished...")
     except:

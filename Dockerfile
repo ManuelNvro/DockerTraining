@@ -1,4 +1,3 @@
-
 FROM phusion/baseimage:0.9.22
 MAINTAINER Manuel Navarro Catalan "manosnavarro@gmail.com"
 
@@ -9,7 +8,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 USER root
 
 RUN add-apt-repository 'deb http://build.openmodelica.org/apt xenial stable'
-RUN curl -s http://build.openmodelica.org/apt/openmodelica.asc | apt-key add -
+RUN curl -s http://build.openmodelica.org/apt/openmodelica.asc | apt-key add - 
 
 # Install python, omc
 RUN apt-get update --fix-missing && apt-get upgrade -y -o Dpkg::Options::="--force-confold" && apt-get install -y \
@@ -20,7 +19,7 @@ RUN apt-get update --fix-missing && apt-get upgrade -y -o Dpkg::Options::="--for
     python-numpy \
     omc \
     omlib-modelica-3.2.2
-
+   
 RUN pip install --upgrade pip
 
 #Install python 3.7  
@@ -58,16 +57,20 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN useradd -m -s /bin/bash manuelnvro
 RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
+#RUN pwd
+
+# Install Git & Pull OpenIPSL
+#RUN apt-get update
+#RUN	apt install -y git
+#WORKDIR /home/manuelnvro/
+#RUN git clone https://github.com/OpenIPSL/OpenIPSL.git 
+
+#WORKDIR /
+
 COPY ./OpenIPSLVerification/VerificationRoutines/CI /home/manuelnvro/CI
-#COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL
+COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL
 COPY ./OpenIPSLVerification/VerificationRoutines/WorkingDir /home/manuelnvro/WorkingDir
 COPY ./CSVVerification /home/manuelnvro/CSVVerification
-
-# Install Git
-RUN apt-get update
-RUN	apt install -y git
-WORKDIR /home/manuelnvro/
-RUN git clone https://github.com/OpenIPSL/OpenIPSL.git 
 
 # Change user permissions
 RUN chmod -R ugo+rwx /home/manuelnvro
@@ -76,4 +79,4 @@ USER manuelnvro
 ENV USER manuelnvro
 WORKDIR /home/manuelnvro/CI/
 
-
+#CMD [ "python", "./modelCheck.py" ]
