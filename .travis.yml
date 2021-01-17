@@ -6,12 +6,11 @@ services: docker
 
 before_script:
   - sudo docker pull manuelnvro/dockertraining:1.8
-  - sudo docker build -t manuelnvro/dockertraining:1.8 .
   - sudo docker run manuelnvro/dockertraining:1.8 sh -c "python3.7 modelCheck.py"
 
 
 script:
-- sudo docker run manuelnvro/dockertraining:1.8 sh -c "cd Fault; python3.7 FaultRunAllOpenModelica.py"
+- sudo docker run manuelnvro/dockertraining:1.8 sh -c "python3.7 PythonRunAllOpenModelica.py"
 #- sudo docker run manuelnvro/dockertraining:1.6 sh -c "cd LoadVariation; python3.7 LoadVariationRunAllOpenModelica.py"
 #- sudo docker run manuelnvro/dockertraining:1.6 sh -c "cd ReferenceStep; python3.7 ReferenceStepExcitersOpenModelica.py"
 
