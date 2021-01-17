@@ -143,10 +143,6 @@ for tgovernorNumber, tgovernorName in enumerate(tgovernors['names']):
     print("Delete OK...\n")
 print('Fault Turbine Governors Examples Open Modelica Simulation OK...')
 
-
-# In[8]:
-
-
 try:
     print("Closing Open Modelica...")
     omc.sendExpression("quit()")

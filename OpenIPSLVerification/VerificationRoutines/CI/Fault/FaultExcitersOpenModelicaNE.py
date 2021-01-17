@@ -10,51 +10,33 @@ import os
 import shutil
 
 # get current directory and set it to the beginning of the repository 
-RepoDir = os.getcwd()
+RepoDir = os.getcwd() 
+RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
+RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
+RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
+RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 RepoDir = os.path.abspath(os.path.join(RepoDir, os.pardir))
 
+#By default, the code runs in manuelnvro Dell using Dymola 2020. To change the computer change the following folders.
 #OpenIPSL Location
-OpenIPSL = RepoDir + "/OpenIPSL/"
-OpenIPSLPackage = RepoDir + "/OpenIPSL/OpenIPSL/package.mo"
+OpenIPSL = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/"
+#GitHub Location
+GitHubOpenIPSL = "https://github.com/marcelofcastro/OpenIPSL.git"
+OpenIPSLPackage = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/package.mo"
+OpenModelica = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/"
 #Working Directory
-RSExcitersWorkingDir = RepoDir + "/WorkingDir/ReferenceStep/Exciters/"
+FExcitersWorkingDir = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/WorkingDir/Fault/Exciters/"
 #Load Variation Folder Locations
-LoadVariationSource = RepoDir + "/CI/LoadVariation/AuxiliaryModels/Load_variation.mo"
-LoadVariationDestinationPath = RepoDir + "/OpenIPSL/OpenIPSL/Electrical/Loads/PSSE/Load_variation.mo"
+LoadVariationSource = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/LoadVariation/AuxiliaryModels/Load_variation.mo"
+LoadVariationDestinationPath = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Loads/PSSE/"
+LoadVariationDestination = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Loads/PSSE/Load_variation.mo"
 # Power Fault Folder Locations
-PowerFaultSource = RepoDir + "/CI/LoadVariation/AuxiliaryModels/PwFault.mo"
-PowerFaultDestinationPath = RepoDir + "/OpenIPSL/OpenIPSL/Electrical/Events/"
-PowerFaultDestination = RepoDir + "/OpenIPSL/OpenIPSL/Electrical/Events/PwFault.mo"
-# SMIB Partial Folder Location
-SMIBPartialSource = RepoDir + "/CI/LoadVariation/AuxiliaryModels/SMIBpartial.mo"
-SMIBPartialDestinationPath = RepoDir + "/OpenIPSL/OpenIPSL/Examples/"
-SMIBPartialDestination = RepoDir + "/OpenIPSL/OpenIPSL/Examples/SMIBpartial.mo"
-# Base Exciter Folder Location
-BaseExciterSource = RepoDir + "/CI/ReferenceStep/AuxiliaryModels/BaseExciter.mo"
-BaseExciterDestinationPath = RepoDir + "/OpenIPSL/OpenIPSL/Electrical/Controls/PSSE/ES/BaseClasses/"
-BaseExciterDestination = RepoDir + "/OpenIPSL/OpenIPSL/Electrical/Controls/PSSE/ES/BaseClasses/BaseExciter.mo"
+PowerFaultSource = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/Scripts/LoadVariation/AuxiliaryModels/PwFault.mo"
+PowerFaultDestinationPath = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Events/"
+PowerFaultDestination = RepoDir + "/NYPAModelTransformation/OpenIPSLVerification/VerificationRoutines/OpenModelica/OpenIPSL/OpenIPSL/Electrical/Events/PwFault.mo"
 
 print(omc.sendExpression("getVersion()"))
-
-#Adding Auxiliary Files
-try:
-    print('Deleting Auxiliary Models')
-    os.chdir(SMIBPartialDestinationPath)
-    os.remove("SMIBpartial.mo")
-    os.chdir(BaseExciterDestinationPath)
-    os.remove("BaseExciter.mo")
-except: 
-    print('Error Deleting Auxiliar Models...')
-try:
-    print('Adding Auxiliary models...')
-    os.system('cp '+SMIBPartialSource+' '+SMIBPartialDestination)
-    os.system('cp '+BaseExciterSource+' '+BaseExciterDestination)
-except:
-    print('Error Adding Auxiliary Models...\n') 
-print("Reference Step Open Modelica Exciters Simulation Start...\n")
-
-
 
 #Creation of matrix with names, paths and variables
 exciters = { 'names' : ["AC7B","AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "ESST1A", "ESST3A", "ESST4B", 
@@ -81,28 +63,25 @@ exciters = { 'names' : ["AC7B","AC8B", "ESAC1A", "ESAC2A", "ESAC6A", "ESDC1A", "
                         "iEEET3.EFD", "iEEET5.EFD", "rEXSYS.EFD", "sCRX.EFD", "sEXS.EFD", "sT6B.EFD"]}
 
 #Delete old results
-try:
-    shutil.rmtree(''+RSExcitersWorkingDir+'')
-except:
-    pass
+shutil.rmtree(''+FExcitersWorkingDir+'')
 #Create Exciters folder
-os.makedirs(''+RSExcitersWorkingDir+'')
-os.chdir(f""+RSExcitersWorkingDir+"")
+os.makedirs(''+FExcitersWorkingDir+'')
+os.chdir(f""+FExcitersWorkingDir+"")
 for exciterNumber, exciterName in enumerate(exciters['names']):
     os.makedirs(f'{exciterName}')
 
 #For loop that will iterate between machines, simulate, and create the .csv file
 for exciterNumber, exciterName in enumerate(exciters['names']):
-    print(f"Reference Step {exciterName} Simulation Start...")
+    print(f"Fault {exciterName} Simulation Start...")
     try:
-        omc.sendExpression(f"cd(\"{RSExcitersWorkingDir}" + exciterName +"\")")
+        omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
         omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
         omc.sendExpression("instantiateModel(OpenIPSL)")
         omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
-        sim = SimRes(""+RSExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
+        sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
         print(f"{exciterName} Simulation Finished...")
     except:
-        print(f"{exciterName} simulation error or model not found...")
+        print(f"{exciterName} simulation error or model not found...\n")
     try:
         #Selecting Variables
         print(".csv Writing Start...") 
@@ -125,7 +104,7 @@ for exciterNumber, exciterName in enumerate(exciters['names']):
                         df_variables[var] = first[0] * np.ones(df_variables['Time'].size)
             print(f"{exciterName} Variables OK...")
             #Changing current directory
-            os.chdir(f""+RSExcitersWorkingDir+"")
+            os.chdir(f""+FExcitersWorkingDir+"")
             df_variables.to_csv(f'{exciterName}.csv', index = False)          
             print(f"{exciterName} Write OK...")
         except:
@@ -148,18 +127,14 @@ for exciterNumber, exciterName in enumerate(exciters['names']):
                         df_variables[var] = first[0] * np.ones(df_variables['Time'].size)
             print(f"{exciterName} Variables OK...")
             #Changing current directory
-            os.chdir(f""+RSExcitersWorkingDir+"")
+            os.chdir(f""+FExcitersWorkingDir+"")
             df_variables.to_csv(f'{exciterName}.csv', index = False)          
             print(f"{exciterName} Write OK...")
     except:
         print(f"{exciterName} variable error...\n")
-    shutil.rmtree(""+RSExcitersWorkingDir+f"{exciterName}/")
+    shutil.rmtree(""+FExcitersWorkingDir+f"{exciterName}/")
     print("Delete OK...\n")        
-print('Reference Step Exciter Examples Open Modelica Simulation OK...')
-
-
-# In[ ]:
-
+print('Fault Exciter Examples Open Modelica Simulation OK...')
 
 try:
     print("Closing Open Modelica...")
@@ -167,3 +142,4 @@ try:
     print("OpenModelica Close OK...")
 except:
     print("Open Modelica closing error...")
+

@@ -15,12 +15,12 @@ comma = "\",\""
 
 ResultDir = os.getcwd()
 ResultDir = os.path.abspath(os.path.join(ResultDir, os.pardir))
-ResultDir = os.path.abspath(os.path.join(ResultDir, os.pardir))
-ResultDir = ResultDir + "/manuelnvro/WorkingDir/"
+#ResultDir = os.path.abspath(os.path.join(ResultDir, os.pardir))
+ResultDir = ResultDir + "/WorkingDir/"
 
 compareDir = os.getcwd()
 compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
-compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
+#compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
 
 
 #This is intended to be used in the manuelnvro Dell using Dymola 2020
@@ -45,16 +45,15 @@ def modelsCompare(modelList, modelType, simulationType):
     for modelNumber, modelName in enumerate(modelList):  
         totalTests += 1
         DockerDir = modelDir + modelName+".csv"
-        PSSEDir = compareDir + "/manuelnvro/CSVVerification/PSSE/"+simulationType+"/"+modelType+"/"+modelName+".csv"
-        compare = os.system("mono "+compareDir+"/manuelnvro/CSVVerification/Compare.exe --mode CsvFileCompare --delimiter " +comma+ " --tolerance 1e-2 " +DockerDir+ " " +PSSEDir)
+        #PSSEDir = compareDir + "/manuelnvro/CSVVerification/PSSE/"+simulationType+"/"+modelType+"/"+modelName+".csv"
+        #compare = os.system("mono "+compareDir+"/manuelnvro/CSVVerification/Compare.exe --mode CsvFileCompare --delimiter " +comma+ " --tolerance 1e-2 " +DockerDir+ " " +PSSEDir)
+        PSSEDir = compareDir + "/CSVVerification/PSSE/"+simulationType+"/"+modelType+"/"+modelName+".csv"
+        compare = os.system("mono "+compareDir+"/CSVVerification/Compare.exe --mode CsvFileCompare --delimiter " +comma+ " --tolerance 1e-2 " +DockerDir+ " " +PSSEDir)
+        
         if compare == 0:
             testsPassed += 1
         else:
             testsFailed += 1
-    # print(f"Fault {modelType} Models Check Summary:")
-    # print("--Passed -> " + str(testsPassed))
-    # print("--Failed -> " + str(testsFailed))
-    # print("--Total -> " + str(totalTests) + "\n")
     return testsFailed
 
 #Run Fault
@@ -161,24 +160,29 @@ totalFailed = excitersFailed + machinesFailed + turbinegovernorsFailed + powersy
 if totalFailed != 0:
     print("Error: some tests did not pass!\n")
     #Fault
-    print("--Fault, Exciter Test Errors: " + str(FexcitersFailed))
-    print("--Fault, Machines Test Errors: " + str(FmachinesFailed))
-    print("--Fault, Turbine Governors Test Errors: " + str(FturbinegovernorsFailed))
-    print("--Fault, Power System Stabilizers Test Errors: " + str(FpowersystemstabilizersFailed))
-    print("--Fault, Wind Turbines Test Errors: " + str(FwindturbinesFailed))
+    print("--Fault, Exciter Test Errors: " + str(FexcitersFailed) + "/" + str(len(models['exciters'])))
+    print("--Fault, Machines Test Errors: " + str(FmachinesFailed) + "/" + str(len(models['machines'])))
+    print("--Fault, Turbine Governors Test Errors: " + str(FturbinegovernorsFailed) + "/" + str(len(models['turbinegovernors'])))
+    print("--Fault, Power System Stabilizers Test Errors: " + str(FpowersystemstabilizersFailed) + "/ " + str(len(models['powersystemstabilizers'])))
+    print("--Fault, Wind Turbines Test Errors: " + str(FwindturbinesFailed) + "/" + str(len(models['windturbines'])))
     print("--Fault, Total Test Errors: " + str(FtotalFailed))
     #Load Variation
-    print("--Load Variation, Exciter Test Errors: " + str(LVexcitersFailed))
-    print("--Load Variation, Machines Test Errors: " + str(LVmachinesFailed))
-    print("--Load Variation, Turbine Governors Test Errors: " + str(LVturbinegovernorsFailed))
-    print("--Load Variation, Power System Stabilizers Test Errors: " + str(LVpowersystemstabilizersFailed))
-    print("--Load Variation, Wind Turbines Test Errors: " + str(LVwindturbinesFailed))
+    print("--Load Variation, Exciter Test Errors: " + str(LVexcitersFailed) + "/" + str(len(models['exciters'])))
+    print("--Load Variation, Machines Test Errors: " + str(LVmachinesFailed) + "/" + str(len(models['machines'])))
+    print("--Load Variation, Turbine Governors Test Errors: " + str(LVturbinegovernorsFailed) + "/" + str(len(models['turbinegovernors'])))
+    print("--Load Variation, Power System Stabilizers Test Errors: " + str(LVpowersystemstabilizersFailed) + "/" + str(len(models['powersystemstabilizers'])))
+    print("--Load Variation, Wind Turbines Test Errors: " + str(LVwindturbinesFailed) + "/" + str(len(models['windturbines'])))
     print("--Load Variation, Total Test Errors: " + str(LVtotalFailed))
     #Reference Step
-    print("--Reference Step Exciter Test Errors: " + str(RSexcitersFailed))
+    print("--Reference Step Exciter Test Errors: " + str(RSexcitersFailed) + "/" + str(len(models['exciters'])))
     #Total
     print("--Total Test Errors: " + str(totalFailed))
     sys.exit(1)
 else:
     print("All model ca passed! Ready to merge...")
     sys.exit(0)
+
+
+    #get this into the nypa git and test
+    #check if it works with the OpenIPSL
+    # Fix Travis Build
