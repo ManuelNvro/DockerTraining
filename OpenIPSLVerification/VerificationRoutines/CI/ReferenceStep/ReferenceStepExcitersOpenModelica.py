@@ -93,16 +93,17 @@ for exciterNumber, exciterName in enumerate(exciters['names']):
 
 #For loop that will iterate between machines, simulate, and create the .csv file
 for exciterNumber, exciterName in enumerate(exciters['names']):
-    print(f"Reference Step {exciterName} Simulation Start...")
+    
     try:
-        omc.sendExpression(f"cd(\"{RSExcitersWorkingDir}" + exciterName +"\")")
+        print(f"{exciterName} Simulation Start...")
+        omc.sendExpression(f"cd(\"{FExcitersWorkingDir}" + exciterName +"\")")
         omc.sendExpression(f"loadFile(\"{OpenIPSLPackage}\")")
         omc.sendExpression("instantiateModel(OpenIPSL)")
         omc.sendExpression(f"simulate(OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}, stopTime=10.0,method=\"rungekutta\",numberOfIntervals=5000,tolerance=1e-06)")
-        sim = SimRes(""+RSExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
+        sim = SimRes(""+FExcitersWorkingDir+f"{exciterName}/OpenIPSL.Examples.Controls.PSSE.ES.{exciterName}_res.mat")
         print(f"{exciterName} Simulation Finished...")
     except:
-        print(f"{exciterName} simulation error or model not found...")
+        print(f"{exciterName} simulation error or model not found...\n")
     try:
         #Selecting Variables
         print(".csv Writing Start...") 
@@ -125,7 +126,7 @@ for exciterNumber, exciterName in enumerate(exciters['names']):
                         df_variables[var] = first[0] * np.ones(df_variables['Time'].size)
             print(f"{exciterName} Variables OK...")
             #Changing current directory
-            os.chdir(f""+RSExcitersWorkingDir+"")
+            os.chdir(f""+FExcitersWorkingDir+"")
             df_variables.to_csv(f'{exciterName}.csv', index = False)          
             print(f"{exciterName} Write OK...")
         except:
@@ -148,17 +149,17 @@ for exciterNumber, exciterName in enumerate(exciters['names']):
                         df_variables[var] = first[0] * np.ones(df_variables['Time'].size)
             print(f"{exciterName} Variables OK...")
             #Changing current directory
-            os.chdir(f""+RSExcitersWorkingDir+"")
+            os.chdir(f""+FExcitersWorkingDir+"")
             df_variables.to_csv(f'{exciterName}.csv', index = False)          
             print(f"{exciterName} Write OK...")
     except:
         print(f"{exciterName} variable error...\n")
-    shutil.rmtree(""+RSExcitersWorkingDir+f"{exciterName}/")
-    print("Delete OK...\n")        
-print('Reference Step Exciter Examples Open Modelica Simulation OK...')
-
-
-# In[ ]:
+    try:
+        shutil.rmtree(""+FExcitersWorkingDir+f"{exciterName}/")
+        print("Delete OK...\n")
+    except:
+        print("Error...\n")         
+print('Fault Exciter Examples Open Modelica Simulation OK...')
 
 
 try:

@@ -8,22 +8,67 @@ import pandas as pd
 import numpy as np
 import os
 import shutil
+import sys
 
 RepoDir = os.getcwd() 
 Fault = RepoDir 
 comma = "\",\""
 
+# ResultDir = os.getcwd()
+# ResultDir = os.path.abspath(os.path.join(ResultDir, os.pardir))
+# #ResultDir = os.path.abspath(os.path.join(ResultDir, os.pardir))
+# ResultDir = ResultDir + "/WorkingDir/"
+
+# compareDir = os.getcwd()
+# compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
+# #compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
+# print(compareDir)
+
+
+# #This is intended to be used in the manuelnvro Dell using Dymola 2020
+# Fault = RepoDir + "/Fault/"
+# LoadVariation = RepoDir + "/LoadVariation/"
+# ReferenceStep = RepoDir + "/ReferenceStep/"
+
+# models = { 'exciters' : ["ESAC1A", "ESAC2A", "ESDC1A", "ESST1A", "ESST4B", 
+#                         "EXAC1", "EXAC2", "EXST1", "IEEET1", "IEEET2", 
+#                         "SCRX", "SEXS"],
+#             'machines' : ["GENROU","GENSAL", "GENCLS", "GENROE", "GENSAE", "CSVGN1"],
+#             'turbinegovernors' : ["GAST", "HYGOV", "IEEEG1", "IEESGO", "TGOV1" ],
+#            'powersystemstabilizers' : ["PSS2B"],
+#             'windturbines' : ["WT4G1"]}
+
+# def modelsCompare(modelList, modelType, simulationType):
+#     testsFailed = 0
+#     testsPassed = 0
+#     totalTests = 0
+#     modelDir = ResultDir + ""+simulationType+"/"+modelType+"/"
+#     #Fault
+#     for modelNumber, modelName in enumerate(modelList):  
+#         print("--------------------------------------------"+modelName+"--------------------------------------------")
+#         totalTests += 1
+#         DockerDir = modelDir + modelName+".csv"
+#         PSSEDir = compareDir + "/manuelnvro/CSVVerification/PSSE/"+simulationType+"/"+modelType+"/"+modelName+".csv"
+#         compare = os.system("mono "+compareDir+"/CSVVerification/Compare.exe --mode CsvFileCompare --delimiter " +comma+ " --tolerance 1e-2 " +DockerDir+ " " +PSSEDir)
+#         if compare == 0:
+#             testsPassed += 1
+#         else:
+#             testsFailed += 1
+#     return testsFailed
+
+
 ResultDir = os.getcwd()
 ResultDir = os.path.abspath(os.path.join(ResultDir, os.pardir))
 #ResultDir = os.path.abspath(os.path.join(ResultDir, os.pardir))
 ResultDir = ResultDir + "/WorkingDir/"
+print(ResultDir)
 
 compareDir = os.getcwd()
 compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
 #compareDir = os.path.abspath(os.path.join(compareDir, os.pardir))
+print(compareDir)
 
 
-#This is intended to be used in the manuelnvro Dell using Dymola 2020
 Fault = RepoDir + "/Fault/"
 LoadVariation = RepoDir + "/LoadVariation/"
 ReferenceStep = RepoDir + "/ReferenceStep/"
@@ -43,13 +88,11 @@ def modelsCompare(modelList, modelType, simulationType):
     modelDir = ResultDir + ""+simulationType+"/"+modelType+"/"
     #Fault
     for modelNumber, modelName in enumerate(modelList):  
+        print("-------------------------------------------------"+simulationType+" , "+modelName+"-------------------------------------------------")
         totalTests += 1
         DockerDir = modelDir + modelName+".csv"
-        #PSSEDir = compareDir + "/manuelnvro/CSVVerification/PSSE/"+simulationType+"/"+modelType+"/"+modelName+".csv"
-        #compare = os.system("mono "+compareDir+"/manuelnvro/CSVVerification/Compare.exe --mode CsvFileCompare --delimiter " +comma+ " --tolerance 1e-2 " +DockerDir+ " " +PSSEDir)
         PSSEDir = compareDir + "/CSVVerification/PSSE/"+simulationType+"/"+modelType+"/"+modelName+".csv"
         compare = os.system("mono "+compareDir+"/CSVVerification/Compare.exe --mode CsvFileCompare --delimiter " +comma+ " --tolerance 1e-2 " +DockerDir+ " " +PSSEDir)
-        
         if compare == 0:
             testsPassed += 1
         else:
@@ -83,12 +126,9 @@ try:
 except:
     print('Error in Reference Step Testing...')
 
-
-
 print('---------------------------------------------------------- End of All Open Modelica Simulations ----------------------------------------------------------')
 
 print('---------------------------------------------------------- CSV Compare Sart ------------------------------------------------------------------------------')
-
 #Fault
 try:
     FexcitersFailed = modelsCompare(models['exciters'], "Exciters","Fault")
@@ -184,5 +224,6 @@ else:
 
 
     #get this into the nypa git and test
+    #fix exciters 
     #check if it works with the OpenIPSL
     # Fix Travis Build
