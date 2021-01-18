@@ -6,6 +6,7 @@ services: docker
 
 before_script:
   - sudo docker pull manuelnvro/dockertraining:1.9
+  - sudo docker build -t mmanuelnvro/dockertraining:1.9 .
   #- sudo docker run manuelnvro/dockertraining:1.9 sh -c "python3.7 modelCheck.py"
 
 
