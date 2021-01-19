@@ -48,6 +48,7 @@ def excitersCheck(modelList):
 				testsPassed += 1
 			else:
 				testsFailed += 1
+				print("Failed:" + test)
 	print("Exciters Models Check Summary:")
 	print("--Passed -> " + str(testsPassed))
 	print("--Failed -> " + str(testsFailed))
@@ -66,6 +67,7 @@ def machinesCheck(modelList):
 				testsPassed += 1
 			else:
 				testsFailed += 1
+				print("Failed:" + test)
 	print("Machines Models Check Summary:")
 	print("--Passed -> " + str(testsPassed))
 	print("--Failed -> " + str(testsFailed))
@@ -84,6 +86,7 @@ def turbinegovernorsCheck(modelList):
 				testsPassed += 1
 			else:
 				testsFailed += 1
+				print("Failed:" + test)
 	print("Turbine Governors Models Check Summary:")
 	print("--Passed -> " + str(testsPassed))
 	print("--Failed -> " + str(testsFailed))
@@ -102,6 +105,7 @@ def powersystemstabilizersCheck(modelList):
 				testsPassed += 1
 			else:
 				testsFailed += 1
+				print("Failed:" + test)
 	print("Power System Stabilizers Models Check Summary:")
 	print("--Passed -> " + str(testsPassed))
 	print("--Failed -> " + str(testsFailed))
@@ -120,6 +124,7 @@ def windturbinesCheck(modelList):
 				testsPassed += 1
 			else:
 				testsFailed += 1
+				print("Failed:" + test)
 	print("Wind Turbines Models Check Summary:")
 	print("--Passed -> " + str(testsPassed))
 	print("--Failed -> " + str(testsFailed))
