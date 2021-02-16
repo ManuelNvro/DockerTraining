@@ -6,8 +6,8 @@ services: docker
 
 before_script:
   - sudo docker pull manuelnvro/dockertraining:1.9
-  #- sudo docker build -t manuelnvro/dockertraining:1.9 .
-  #- sudo docker run manuelnvro/dockertraining:1.9 sh -c "python3.7 modelCheck.py"
+  - sudo docker build -t manuelnvro/dockertraining:1.9 .
+  - sudo docker run manuelnvro/dockertraining:1.9 sh -c "python3.7 modelCheck.py"
   # copy openipsl from github
 
 
