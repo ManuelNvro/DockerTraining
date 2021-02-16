@@ -51,34 +51,34 @@ def modelsCompare(modelList, modelType, simulationType):
             testsFailed += 1
     return testsFailed
 
-# #Run Fault
-# print('---------------------------------------------------------- Open Modelica Fault Testing ----------------------------------------------------------')
-# try:
-#     os.chdir(f""+Fault+"")
-#     exec(open("FaultRunAllOpenModelica.py").read())
-#     print('Fault Testing OK...')
-# except:
-#     print('Error in Fault Testing...')
+#Run Fault
+print('---------------------------------------------------------- Open Modelica Fault Testing ----------------------------------------------------------')
+try:
+    os.chdir(f""+Fault+"")
+    exec(open("FaultRunAllOpenModelica.py").read())
+    print('Fault Testing OK...')
+except:
+    print('Error in Fault Testing...')
 
-# #Run Load Variation
-# print('---------------------------------------------------------- Open Modelica Load Variation Testing ----------------------------------------------------------')
-# try:
-#     os.chdir(f""+LoadVariation+"")
-#     exec(open("LoadVariationRunAllOpenModelica.py").read())
-#     print('Load Variation Testing OK...')
-# except:
-#     print('Error in Load Variation Testing...')
+#Run Load Variation
+print('---------------------------------------------------------- Open Modelica Load Variation Testing ----------------------------------------------------------')
+try:
+    os.chdir(f""+LoadVariation+"")
+    exec(open("LoadVariationRunAllOpenModelica.py").read())
+    print('Load Variation Testing OK...')
+except:
+    print('Error in Load Variation Testing...')
 
-# #Run Reference Step
-# print('---------------------------------------------------------- Open Modelica Reference Step Testing ----------------------------------------------------------')
-# try:
-#     os.chdir(f""+ReferenceStep+"")
-#     exec(open("ReferenceStepExcitersOpenModelica.py").read())
-#     print('Reference Step Testing OK...')
-# except:
-#     print('Error in Reference Step Testing...')
+#Run Reference Step
+print('---------------------------------------------------------- Open Modelica Reference Step Testing ----------------------------------------------------------')
+try:
+    os.chdir(f""+ReferenceStep+"")
+    exec(open("ReferenceStepExcitersOpenModelica.py").read())
+    print('Reference Step Testing OK...')
+except:
+    print('Error in Reference Step Testing...')
 
-# print('---------------------------------------------------------- End of All Open Modelica Simulations ----------------------------------------------------------')
+print('---------------------------------------------------------- End of All Open Modelica Simulations ----------------------------------------------------------')
 
 print('---------------------------------------------------------- CSV Compare Sart ------------------------------------------------------------------------------')
 #Fault
