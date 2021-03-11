@@ -12,4 +12,4 @@ before_script:
 
 
 script:
-- sudo docker run manuelnvro/dockertraining:1.5 sh -c "python3.7 FaultExcitersOpenModelica.py"
+- sudo docker run manuelnvro/dockertraining:1.5 sh -c "cd Fault; python3.7 FaultExcitersOpenModelica.py"
