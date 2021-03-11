@@ -9,8 +9,6 @@ services: docker
 
 before_script:
   - pwd
-  - cd DockerTraining/
-  - pwd
   - ls
   - cd ..
   - cd ..
