@@ -8,15 +8,23 @@ git:
 services: docker
 
 before_script:
+  - pwd
+  - cd ..
+  - pwd
+  - cd .. 
+  - pwd
   - sudo docker pull manuelnvro/dockertraining:1.9
   - sudo docker build -t manuelnvro/dockertraining:1.9 .
+  - pwd
+  - cd ..
+  - pwd
   #- sudo docker run manuelnvro/dockertraining:1.9 sh -c "python3.7 modelCheck.py"
   # copy openipsl from github
 
 
 script:
 #- sudo docker run manuelnvro/dockertraining:1.9 sh -c "python3.7 modelCheck.py"
-- sudo docker run manuelnvro/dockertraining:1.9 sh -c "python3.7 PythonRunAllOpenModelica.py"
+#- sudo docker run manuelnvro/dockertraining:1.9 sh -c "python3.7 PythonRunAllOpenModelica.py"
 #- sudo docker run manuelnvro/dockertraining:1.9 sh -c "cd LoadVariation; python3.7 LoadVariationRunAllOpenModelica.py"
 #- sudo docker run manuelnvro/dockertraining:1.9 sh -c "cd ReferenceStep; python3.7 ReferenceStepExcitersOpenModelica.py"
 
