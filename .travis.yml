@@ -1,6 +1,9 @@
 language: bash
 python:
   - "3.7"
+  
+git:
+  depth: false
 
 services: docker
 
