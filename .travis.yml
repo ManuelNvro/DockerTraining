@@ -9,15 +9,21 @@ services: docker
 
 before_script:
   - pwd
+  - cd DockerTraining/
+  - pwd
+  - ls
+  - cd ..
   - cd ..
   - pwd
   - cd .. 
   - pwd
+  - cd /home/travis/build/ManuelNvro/DockerTraining/
   - sudo docker pull manuelnvro/dockertraining:1.9
   - sudo docker build -t manuelnvro/dockertraining:1.9 .
   - pwd
   - cd ..
   - pwd
+  - ls
   #- sudo docker run manuelnvro/dockertraining:1.9 sh -c "python3.7 modelCheck.py"
   # copy openipsl from github
 
