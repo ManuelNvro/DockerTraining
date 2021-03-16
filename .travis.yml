@@ -10,6 +10,8 @@ services: docker
 before_script:
   - pwd
   - ls
+  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/
+  - ls
   - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/OpenIPSL/
   - ls
   - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/VerificationRoutines/
