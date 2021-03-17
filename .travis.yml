@@ -4,6 +4,7 @@ python:
   
 git:
   depth: false
+  submodules: false
 
 services: docker
 
