@@ -13,7 +13,7 @@ before_script:
   - ls
   - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/
   - ls
-  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSL/OpenIPSL/
+  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSL/
   - ls
   - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/VerificationRoutines/
   - ls
