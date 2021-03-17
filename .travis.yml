@@ -13,9 +13,9 @@ before_script:
   - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/
   - ls
   - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/VerificationRoutines/
-  - ls
-  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/VerificationRoutines/OpenIPSL/
   - ls  
+  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSL/
+  - ls
   - cd /home/travis/build/ManuelNvro/DockerTraining/
   - sudo docker pull manuelnvro/dockertraining:1.9
   - sudo docker build -t manuelnvro/dockertraining:1.9 .
