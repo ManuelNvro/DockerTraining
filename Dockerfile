@@ -58,7 +58,7 @@ RUN useradd -m -s /bin/bash manuelnvro
 RUN chown -R manuelnvro:manuelnvro /home/manuelnvro
 
 COPY ./OpenIPSLVerification/VerificationRoutines/CI /home/manuelnvro/CI
-COPY ./OpenIPSL /home/manuelnvro/OpenIPSL
+COPY ./OpenIPSLVerification/VerificationRoutines/OpenIPSL /home/manuelnvro/OpenIPSL
 COPY ./OpenIPSLVerification/VerificationRoutines/WorkingDir /home/manuelnvro/WorkingDir
 COPY ./CSVVerification /home/manuelnvro/CSVVerification
 

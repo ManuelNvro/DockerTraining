@@ -1,3 +1,0 @@
-[submodule "OpenIPSL"]
-	path = OpenIPSLVerification/VerificationRoutines/OpenIPSL
-	url = https://github.com/OpenIPSL/OpenIPSL.git
