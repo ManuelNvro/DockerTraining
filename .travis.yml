@@ -12,11 +12,11 @@ before_script:
   - ls
   - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/
   - ls
-  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/OpenIPSL/
+  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSL/OpenIPSL/
   - ls
   - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/VerificationRoutines/
   - ls
-  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSLVerification/VerificationRoutines/OpenIPSL/
+  - cd /home/travis/build/ManuelNvro/DockerTraining/OpenIPSL/
   - ls  
   - cd /home/travis/build/ManuelNvro/DockerTraining/
   - sudo docker pull manuelnvro/dockertraining:1.9
